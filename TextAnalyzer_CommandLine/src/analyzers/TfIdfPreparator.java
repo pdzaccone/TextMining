@@ -28,12 +28,14 @@ public class TfIdfPreparator implements IElementalAnalyzer, IDocAnalyzer, ICorpu
 	private FunctionIDF functionIDF;
 	private boolean isInitialized;
 	private final boolean shouldOverwrite;
+	private boolean multipleLangsPerDoc;
 	
-	public TfIdfPreparator(boolean overwrite, FunctionTF funcTF, FunctionIDF funcIDF) {
+	public TfIdfPreparator(boolean overwrite, FunctionTF funcTF, FunctionIDF funcIDF, boolean multiLanguage) {
 		this.shouldOverwrite = overwrite;
 		this.functionTF = funcTF;
 		this.functionIDF = funcIDF;
 		this.isInitialized = false;
+		this.multipleLangsPerDoc = multiLanguage;
 	}
 
 	@Override
@@ -57,8 +59,17 @@ public class TfIdfPreparator implements IElementalAnalyzer, IDocAnalyzer, ICorpu
 	public PairAnalysisResults feed(IDataUnitDoc input) {
 		PairAnalysisResults result = new PairAnalysisResults();
 		WordTable table = new WordTable();
-		input.getAnalysisResults(AnalysisTypes.wordTable).stream().filter(val -> val instanceof WordTable)
-														 .forEach(val -> table.add((WordTable) val));
+		if (multipleLangsPerDoc) {
+			input.getAnalysisResults(AnalysisTypes.wordTable).stream().filter(val -> val instanceof WordTable)
+			 .forEach(val -> table.add((WordTable) val));
+		} else {
+			input.getAnalysisResults(AnalysisTypes.wordTable).stream().filter(val -> {
+				if (val instanceof WordTable) {
+					return ((WordTable)val).getLanguages().size() == 1 && ((WordTable)val).getLanguages().contains(input.getMainLanguage());
+				}
+				return false;
+			}).forEach(val -> table.add((WordTable) val));
+		}
 		WeightsTable weights = table.calculateTF(functionTF);
 		weights.markAsFinal();
 		result.addResult(new Pair<>(weights, shouldOverwrite), IAnalyzer.LOCAL);
@@ -71,6 +82,10 @@ public class TfIdfPreparator implements IElementalAnalyzer, IDocAnalyzer, ICorpu
 		PairAnalysisResults result = new PairAnalysisResults();
 		Languages lang = Languages.unknown;
 		if (!input.getAnalysisResults(AnalysisTypes.language).isEmpty()) {
+			if (((MetadataModification)input.getAnalysisResults(AnalysisTypes.language).get(0)).getData().size() > 1) {
+				int zzz = 0;
+				zzz++;
+			}
 			lang = Languages.fromString(((MetadataModification)input.getAnalysisResults(AnalysisTypes.language)
 					.get(0)).getData().last().getData());
 		}

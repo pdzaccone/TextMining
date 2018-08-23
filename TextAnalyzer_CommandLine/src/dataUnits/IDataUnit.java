@@ -40,4 +40,5 @@ public interface IDataUnit extends ISaveableXML, IReadableXML {
 	public List<IAnalysisResult> getAllAnalysisResults();
 	public void resetAnalysis(AnalysisTypes type);
 	public boolean analysisIsFinalized(AnalysisTypes type);
+	public boolean isEmpty();
 }

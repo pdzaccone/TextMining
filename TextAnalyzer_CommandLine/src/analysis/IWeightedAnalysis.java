@@ -1,7 +1,6 @@
 package analysis;
 
 import java.util.Map;
-import java.util.Set;
 
 import filters.IWeightsFilter;
 import utils.Languages;

@@ -2,8 +2,6 @@ package io;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +10,9 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import categories.ICategory;
+import analysis.ICategory;
 import dataUnits.IDataUnitCorpus;
 import utils.ConfigurationData;
 
@@ -30,7 +26,7 @@ public class ReaderXML implements IReader {
 	
 	@Override
 	public boolean readFromFile(String filename) {
-		boolean Ok = true;
+		boolean Ok = true, goOn = true;
 
 		List<IReadable> results = new ArrayList<>();
 		
@@ -43,7 +39,7 @@ public class ReaderXML implements IReader {
 		try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(filename))) {
 			factory = XMLInputFactory.newInstance();
 			reader = factory.createXMLEventReader(bis, StandardCharsets.UTF_8.name());
-			while (Ok && reader.hasNext()) {
+			while (goOn && Ok && reader.hasNext()) {
 				XMLEvent event = reader.peek();
 				switch (event.getEventType()) {
 					case XMLStreamConstants.START_ELEMENT:
@@ -70,12 +66,19 @@ public class ReaderXML implements IReader {
 								break;
 							}
 							results.add(currentObject);
+						} else /*if (name.equals(XMLEntities.categories.getTagText()))*/ {
+							event = reader.nextEvent();
 						}
 						break;
 						
-						default:
-							event = reader.nextEvent();
-							break;
+					case XMLStreamConstants.END_ELEMENT:
+						event = reader.nextEvent();
+						goOn = false;
+						break;
+						
+					default:
+						event = reader.nextEvent();
+						break;
 				}
 			}
 		}

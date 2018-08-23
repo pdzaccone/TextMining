@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Languages {
-	en("EN", Arrays.asList("a", "the", "with", "and")),
-	de("DE", Arrays.asList("die", "der", "das", "eine", "mit", "und")),
+	en("EN", Arrays.asList("a", "the", "with", "and", "if", "is", "are", "of")),
+	de("DE", Arrays.asList("die", "der", "das", "eine", "mit", "und", "wir", "oder")),
 	unknown("IDK", Arrays.asList());
 	
 	private final String text;

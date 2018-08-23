@@ -1,27 +1,39 @@
 package linearAlgebra;
 
-import org.apache.commons.math3.linear.OpenMapRealVector;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealVector;
-import org.apache.commons.math3.linear.SparseRealVector;
 
 public class TermsVectorApacheCommons implements ITermsVector {
 
 	private final int ID;
 	private RealVector data;
 	
-	public TermsVectorApacheCommons(int id, SparseRealVector vector) {
+	private TermsVectorApacheCommons(int id, RealVector vector) {
 		this.ID = id;
 		this.data = vector;
 	}
-
-	public TermsVectorApacheCommons(int id, RealVector vector) {
-		this.ID = id;
-		this.data = vector;
+	
+	public TermsVectorApacheCommons(int size) {
+		this.ID = DEFAULT_ID;
+		this.data = new ArrayRealVector(size);
 	}
 
-	public TermsVectorApacheCommons() {
-		this.ID = -1;
-		this.data = new SparseRealVector();
+	public TermsVectorApacheCommons(int id, List<String> wordList, Map<String, ? extends Number> wordVals) {
+		this.ID = id;
+		this.data = new ArrayRealVector(wordList.size());
+		for (int i = 0; i < wordList.size(); i++) {
+			if (wordVals.containsKey(wordList.get(i))) {
+				this.data.setEntry(i, (double) wordVals.get(wordList.get(i)));
+			}
+		}
+	}
+
+	public TermsVectorApacheCommons(int id, double[] input) {
+		this.ID = id;
+		this.data = new ArrayRealVector(input);
 	}
 
 	public RealVector getVectorData() {
@@ -39,24 +51,15 @@ public class TermsVectorApacheCommons implements ITermsVector {
 	}
 
 	@Override
-	public ITermsVector add(ITermsVector vector) {
+	public ITermsVector add(ITermsVector vector) throws Exception {
 		if (vector instanceof TermsVectorApacheCommons) {
-			double minValue = this.data.getMinValue();
-			double maxValue = this.data.getMaxValue();
-			double minValue2 = ((TermsVectorApacheCommons)vector).data.getMinValue();
-			double maxValue2 = ((TermsVectorApacheCommons)vector).data.getMaxValue();
-			return new TermsVectorApacheCommons(ID, this.data.add(((TermsVectorApacheCommons)vector).data));
+			return new TermsVectorApacheCommons(ID, this.data.add(((TermsVectorApacheCommons) vector).getVectorData()));
 		}
-		//TODO
-		return null;
+		throw new Exception("Unsupported data type");
 	}
 
 	@Override
-	public double cosine(ITermsVector vector) {
-		if (vector instanceof TermsVectorApacheCommons) {
-			return this.data.cosine(((TermsVectorApacheCommons)vector).data);
-		}
-		//TODO
-		return Double.MAX_VALUE;
+	public int size() {
+		return this.data.getDimension();
 	}
 }

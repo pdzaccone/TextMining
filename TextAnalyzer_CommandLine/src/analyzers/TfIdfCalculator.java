@@ -33,7 +33,9 @@ public class TfIdfCalculator implements IDocAnalyzer {
 		PairAnalysisResults result = new PairAnalysisResults();
 		for (IAnalysisResult anRes : input.getAnalysisResults(AnalysisTypes.weights)) {
 			IAnalysisResult anResCalc = ((IWeightedAnalysis) anRes).calculateTFIDF(corpusData);
-			anResCalc = ((IWeightedAnalysis) anResCalc).filter(this.filter);
+			if (filter != null) {
+				anResCalc = ((IWeightedAnalysis) anResCalc).filter(this.filter);
+			}
 			anResCalc.markAsFinal();
 			result.addResult(new Pair<>(anResCalc, shouldOverwrite), IAnalyzer.LOCAL);
 		}

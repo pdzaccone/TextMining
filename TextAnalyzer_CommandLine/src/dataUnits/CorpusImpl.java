@@ -10,7 +10,6 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
 
 import analysis.IAnalysisResult;
-import analysis.WordsMatrix;
 import analyzers.AnalysisTypes;
 import crawlers.ICrawler;
 import io.IReadableXML;
@@ -49,12 +48,12 @@ public class CorpusImpl implements IDataUnitCorpus {
 						} else {
 							if (readingAnalysis) {
 								IAnalysisResult anRes = IAnalysisResult.readXML(reader);
-								if (anRes != null) {
+								if (anRes != null && !anRes.isEmpty()) {
 									anData.put(anRes.getType(), anRes);
 								}
 							} else if (readingData) {
 								IDataUnitDoc doc = (IDataUnitDoc) IDataUnitDoc.createFromXML(reader);
-								if (doc != null) {
+								if (doc != null && !doc.isEmpty()) {
 									docData.add(doc);
 								}
 							}
@@ -135,10 +134,11 @@ public class CorpusImpl implements IDataUnitCorpus {
 
 	@Override
 	public void addDocument(IDataUnitDoc input) {
-		//TODO Should remake a concept of indices - it is too unsafe now
+		//TODO Should remake a concept of indices - it is too unsafe now - duplicates 
+		//TODO are created if loading data from 2 files consequently
 		if (input != null) {
 			data.add(input);
-			if (input.getID() == -1) {
+			if (input.getID() == IDataUnitDoc.DEFAULT_ID) {
 				input.setID(data.size() - 1);
 			}
 		}
@@ -264,5 +264,10 @@ public class CorpusImpl implements IDataUnitCorpus {
 		return this.analysis.keySet().contains(type) 
 				&& this.analysis.get(type).size() == 1 
 				&& this.analysis.get(type).get(0).isFinal();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return this.data.isEmpty() && this.analysis.isEmpty();
 	}
 }

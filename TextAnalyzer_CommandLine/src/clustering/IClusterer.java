@@ -1,15 +1,14 @@
 package clustering;
 
-import java.util.List;
+import java.util.Map;
 
 import analysis.IAnalysisResult;
+import analysis.ICategory;
 import analysis.WordsMatrix;
 import dataUnits.IDataUnitDoc;
-import functions.IWeightsToDistancesConverter;
 
 public interface IClusterer {
-	public void doClustering();
+	public void doClustering() throws Exception;
 	public IAnalysisResult getCategories(IDataUnitDoc input);
-	public List<IAnalysisResult> getCategories();
-	public void initialize(WordsMatrix data);
+	public void initialize(WordsMatrix data, Map<String, ICategory> categories);
 }

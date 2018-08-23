@@ -1,7 +1,9 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -19,12 +21,18 @@ public class ListMap<T extends Comparable<T>, V> {
 		this.putAll(input);
 	}
 
+	public void removeDuplicates() {
+		for (T key : data.keySet()) {
+			Set<V> tmp = new HashSet<>();
+			tmp.addAll(data.get(key));
+			data.get(key).clear();
+			data.get(key).addAll(tmp);
+		}
+	}
+	
 	public void put(T key, V value) {
 		Objects.requireNonNull(key);
 		Objects.requireNonNull(value);
-//		if (data.containsKey(key) && data.get(key).contains(value)) {
-//			return;
-//		}
 		List<V> list = null;
 		if (data.containsKey(key)) {
 			list = data.get(key);
@@ -34,7 +42,20 @@ public class ListMap<T extends Comparable<T>, V> {
 		list.add(value);
 		data.put(key, list);
 	}
-	
+
+	public void put(T key, List<V> values) {
+		Objects.requireNonNull(key);
+		Objects.requireNonNull(values);
+		List<V> list = null;
+		if (data.containsKey(key)) {
+			list = data.get(key);
+		} else {
+			list = new ArrayList<V>();
+		}
+		list.addAll(values);
+		data.put(key, list);
+	}
+
 	public void putAll(ListMap<T, V> input) {
 		Objects.requireNonNull(input);
 		for (T type : input.keySet()) {
@@ -56,6 +77,10 @@ public class ListMap<T extends Comparable<T>, V> {
 		return data.keySet();
 	}
 	
+	public Collection<List<V>> values() {
+		return data.values();
+	}
+	
 	public List<V> get(T key) {
 		if (this.data.containsKey(key)) {
 			return data.get(key);
@@ -71,5 +96,17 @@ public class ListMap<T extends Comparable<T>, V> {
 
 	public void removeType(T type) {
 		this.data.remove(type);
+	}
+
+	public void remove(T key, V val) {
+		Objects.requireNonNull(key);
+		Objects.requireNonNull(val);
+		if (this.data.containsKey(key)) {
+			this.data.get(key).remove(val);
+		}
+	}
+
+	public void clear() {
+		this.data.clear();
 	}
 }

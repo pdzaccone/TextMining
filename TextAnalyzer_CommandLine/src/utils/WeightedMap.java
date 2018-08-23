@@ -8,14 +8,14 @@ import java.util.TreeSet;
 public class WeightedMap {
 	
 	private int size;
-	private Map<String, Integer> data;
+	private Map<String, Double> data;
 	
 	public WeightedMap() {
 		this.data = new HashMap<>();
 		this.size = 0;
 	}
 	
-	public void add(String input, int count) {
+	public void add(String input, double count) {
 		if (count > 0) {
 			if (data.containsKey(input)) {
 				data.put(input, data.get(input) + count);
@@ -28,6 +28,10 @@ public class WeightedMap {
 
 	public TreeSet<WeightedObject> getWeights() {
 		TreeSet<WeightedObject> result = new TreeSet<>();
+		if (this.data.keySet().size() > 1) {
+			int zzz = 0;
+			zzz++;
+		}
 		for (String key : this.data.keySet()) {
 			result.add(new WeightedObject(key, (double) this.data.get(key) / (double) size));
 		}
@@ -42,7 +46,7 @@ public class WeightedMap {
 		return this.data.keySet();
 	}
 
-	public int get(String term) {
+	public double get(String term) {
 		return this.data.get(term);
 	}
 

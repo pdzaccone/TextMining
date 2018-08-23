@@ -68,4 +68,5 @@ public interface IAnalysisResult extends ISaveableXML, IReadableXML {
 	public void update(IDataUnit obj, boolean shouldOverwrite);
 	public void markAsFinal();
 	public boolean isFinal();
+	public boolean isEmpty();
 }

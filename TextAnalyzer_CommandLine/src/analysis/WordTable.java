@@ -1,5 +1,7 @@
 package analysis;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +30,8 @@ import utils.WeightedObject;
 
 public class WordTable implements IAnalysisResult, IMultilingual {
 
-	public static final double defaultWeight = -1;
+	private static final List<String> listBadWords = new ArrayList<>();
+	
 	private static final AnalysisTypes type = AnalysisTypes.wordTable;
 
 	private static final String separatorTerms = ";";
@@ -36,6 +39,17 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 
 	private static final long thresholdSaveXML = 0;
 
+	static {	
+		Collections.addAll(listBadWords, "und", "du", "der", "die", "zu", "sind", "hast", "sie", "im", "von", "für", "zur", "zu", "mit", 
+				"and", "you", "to", "a", "the", "we", "das", "des", "of", "our", "bis", "vom", "wir", "uns", "bei", "for", "sich", "unsere",
+				"unser", "bei", "this", "bist", "will", "haben", "when", "would", "if", "sowie", "über", "ein", "eine", "vor",
+				"oder", "durch", "ihr", "ihre", "ab", "only", "den", "am", "als", "not", "einer", "dich", "deinen", "deine", "ist", "damit",
+				"unter", "deren", "um", "einem", "unserer", "be", "those", "is", "who", "there", "as", "an", "are", "your", "they",
+				"what", "that", "by", "or", "on", "it", "into", "these", "then", "out", "in", "which", "should", "much", "more", "up",
+				"with", "too", "through", "have", "can", "has", "therefore", "their", "all", "but", "most", "from", "about", "than", "dir", "wie",
+				"unseren", "ihnen");
+	}
+	
 	/**
 	 * At the moment this functionality is not used, because the algorithm cannot distinguish between 
 	 * new and previously generated data. Thus temporarily switched off
@@ -226,10 +240,12 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 
 	public void addRaw(Languages lang, String terms) {
 		for (String s : RegexHelper.split(RegexHelper.patternWords, terms)) {
-			if (s.trim().isEmpty()) {
+			if (s.isEmpty() || s.length() == 1) {
 				continue;
 			}
-			add(lang, s);
+			if (!listBadWords.contains(s)) {
+				add(lang, s);
+			}
 		}
 	}
 
@@ -302,5 +318,10 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 	@Override
 	public boolean isFinal() {
 		return this.markedFinal;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return this.data.isEmpty();
 	}
 }

@@ -2,7 +2,6 @@ package dataUnits;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.xml.stream.XMLEventReader;
@@ -12,9 +11,12 @@ import javax.xml.stream.events.XMLEvent;
 
 import crawlers.ICrawler;
 import io.IReadableXML;
+import utils.Languages;
 
 public interface IDataUnitDoc extends IDataUnit {
 	
+	public static final int DEFAULT_ID = -1;
+
 	public static IReadableXML createFromXML(XMLEventReader reader) {
 		boolean Ok = true, goOn = true;
 
@@ -71,9 +73,9 @@ public interface IDataUnitDoc extends IDataUnit {
 	public IDataUnitDoc applyCrawler(ICrawler converter);
 	public Set<String> getAllTags();
 	public IDataUnitElemental getData(String tag);
-
 	public int getID();
 	public void setID(int id);
-
+	//TODO Get rid of both these methods - they do not fit into architecture
 	public List<String> getCategoriesMap();
+	public Languages getMainLanguage();
 }

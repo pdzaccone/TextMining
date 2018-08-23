@@ -84,20 +84,12 @@ public class TDMatrixPreparator implements IDocAnalyzer, ICorpusAnalyzer {
 		return this.isInitialized;
 	}
 
-//	private SparseRealVector createDataVector(Languages language, Map<String, ? extends Number> input) {
+	private ITermsVector createDataVector(int id, Languages language, Map<String, ? extends Number> input) {
 //		SparseRealVector vector = new OpenMapRealVector(this.words.get(language).size());
 //		for (String term : input.keySet()) {
 //			vector.setEntry(this.words.get(language).indexOf(term), (double) input.get(term));
 //		}
-//		return vector;
-//	}
-
-	private ITermsVector createDataVector(int id, Languages language, Map<String, ? extends Number> input) {
-		SparseRealVector vector = new OpenMapRealVector(this.words.get(language).size());
-		for (String term : input.keySet()) {
-			vector.setEntry(this.words.get(language).indexOf(term), (double) input.get(term));
-		}
-		return new TermsVectorApacheCommons(id, vector);
+		return new TermsVectorApacheCommons(id, this.words.get(language), input);
 	}
 
 	private void initVocabularlyForLanguage(Languages language, Map<String, ? extends Number> newData) {

@@ -71,6 +71,7 @@ public class MetadataAnalyzer implements IElementalAnalyzer {
 	}
 
 	//TODO Temporary method until I understand how to recognize the ID properly
+	//TODO ID recognition does not work properly for text blocks like "12"
 	private IAnalysisResult checkForComplexPattern(Pattern pattern, Pattern patternInternal, AnalysisTypes type, String input) {
 		Collection<String> split = RegexHelper.split(pattern, input);
 		WeightedMap counter = new WeightedMap();

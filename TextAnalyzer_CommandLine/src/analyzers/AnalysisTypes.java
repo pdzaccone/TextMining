@@ -5,8 +5,6 @@ import javax.xml.stream.XMLEventReader;
 import analysis.EmptyAnalysis;
 import analysis.IAnalysisResult;
 import analysis.MetadataModification;
-import analysis.WeightsTable;
-import analysis.WordTable;
 
 public enum AnalysisTypes {
 	none("", false),
@@ -38,7 +36,8 @@ public enum AnalysisTypes {
 		public IAnalysisResult createAnalysisFromXML(XMLEventReader reader) {
 			return MetadataModification.createFromXML(reader, this);
 		}
-	};
+	},
+	categoryWords("categoryWords", false);
 	
 	private final String tagText;
 	private final boolean canBeWrittenToXML;

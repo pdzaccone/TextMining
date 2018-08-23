@@ -22,4 +22,9 @@ public class Pair<T, V> {
 	public V getSecond() {
 		return dataV;
 	}
+
+	public void update(T newFirst, V newSecond) {
+		this.dataT = newFirst;
+		this.dataV = newSecond;
+	}
 }

@@ -13,6 +13,7 @@ import analyzers.AnalysisTypes;
 import dataUnits.IDataUnit;
 import io.IWriterXML;
 import io.XMLException;
+import utils.RegexHelper;
 import utils.WeightedObject;
 
 public class MetadataModification implements IAnalysisResult {
@@ -81,7 +82,8 @@ public class MetadataModification implements IAnalysisResult {
 					for (String singleObj : strs) {
 						String[] finalSplit = singleObj.split(separatorKeyValue);
 						if (finalSplit != null && finalSplit.length == 2) {
-							result.add(new WeightedObject(finalSplit[0], Double.parseDouble(finalSplit[1]) / 100));
+							
+							result.add(new WeightedObject(finalSplit[0], (double)RegexHelper.toNumeric(finalSplit[1]) / 100));
 						}
 					}
 				}
@@ -122,19 +124,6 @@ public class MetadataModification implements IAnalysisResult {
 	public TreeSet<WeightedObject> getData() {
 		return this.data;
 	}
-
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (obj instanceof MetadataModification) {
-//			return this.data.equals(((MetadataModification)obj).data) && this.type.equals(((MetadataModification)obj).type);
-//		}
-//		return false;
-//	}
-//	
-//	@Override
-//    public int hashCode() {
-//		return 31 + ((this.type == null) ? 0 : this.type.hashCode()) + (this.data == null ? 0 : this.data.hashCode());
-//    }
 	 
 	@Override
 	public AnalysisTypes getType() {
@@ -173,5 +162,10 @@ public class MetadataModification implements IAnalysisResult {
 	@Override
 	public boolean isFinal() {
 		return markedFinal;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return this.data.isEmpty();
 	}
 }

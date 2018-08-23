@@ -20,14 +20,12 @@ import utils.WeightedObject;
  * @author Pdz
  *
  */
-public class LanguageAnalyzer implements IElementalAnalyzer, IDocAnalyzer {
+public class LanguageAnalyzer extends LanguageAnalyzerDefault {
 	
-	private boolean shouldOverwrite;
-	private boolean isInitialized;
+	private static final double LANGUAGE_RECOGNITION_PRECISION = 0.8;
 	
 	public LanguageAnalyzer(boolean overwrite) {
-		this.shouldOverwrite = overwrite;
-		this.isInitialized = false;
+		super(overwrite);
 	}
 
 	@Override
@@ -38,6 +36,10 @@ public class LanguageAnalyzer implements IElementalAnalyzer, IDocAnalyzer {
 		if (!input.getValue().isEmpty()) {
 			WeightedMap counter = new WeightedMap();
 			for (Languages lang : Languages.values()) {
+				if (input.getValue().contains("Unternehmenskultur") || input.getValue().contains("unternehmenskultur")) {
+					int zzz = 0;
+					zzz++;
+				}
 				long count = RegexHelper.split(RegexHelper.patternWords, input.getValue())
 						.stream().filter(str -> lang.containsKeyword(str)).count();
 				if (count != 0) {
@@ -48,7 +50,7 @@ public class LanguageAnalyzer implements IElementalAnalyzer, IDocAnalyzer {
 				counter.add(Languages.unknown.getTagText(), 1);
 			}
 			TreeSet<WeightedObject> weights = counter.getWeights();
-			if (!weights.isEmpty() && weights.last().getWeight() == 1) {
+			if (!weights.isEmpty() && weights.last().getWeight() >= LANGUAGE_RECOGNITION_PRECISION) {
 				result.addResult(new Pair<>(new MetadataModification(AnalysisTypes.language, weights.last()), shouldOverwrite), IAnalyzer.SEND_UP);
 				MetadataModification resLocal = new MetadataModification(AnalysisTypes.language, weights.last());
 				resLocal.markAsFinal();

@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.DoubleStream;
 
-import org.apache.commons.math3.linear.OpenMapRealMatrix;
-import org.apache.commons.math3.linear.OpenMapRealVector;
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
 
@@ -29,7 +29,7 @@ public class DTMatrixApacheCommons implements IDocTermMatrix {
 	
 	public DTMatrixApacheCommons(int numberTerms, int numberDocs) {
 		this.docIndices = new HashMap<>();
-		data = new OpenMapRealMatrix(numberTerms, numberDocs);
+		data = new Array2DRowRealMatrix(numberTerms, numberDocs);
 	}
 
 	public DTMatrixApacheCommons(RealMatrix matrix, Map<Integer, Integer> indices) {
@@ -79,15 +79,7 @@ public class DTMatrixApacheCommons implements IDocTermMatrix {
 
 	@Override
 	public Tuple<IDocTermMatrix, IDocTermMatrix, IDocTermMatrix> calculateSVD() {
-//		int numberCols = this.data.getColumnDimension();
-//		int numberRows = this.data.getRowDimension();
 		SingularValueDecomposition svd = new SingularValueDecomposition(data);
-//		int columnDimension = svd.getU().getColumnDimension();
-//		int rowDimension = svd.getU().getRowDimension();
-//		int columnDimension2 = svd.getS().getColumnDimension();
-//		int rowDimension2 = svd.getS().getRowDimension();
-//		int columnDimension3 = svd.getVT().getColumnDimension();
-//		int rowDimension3 = svd.getVT().getRowDimension();
 		return new Tuple<>(new DTMatrixApacheCommons(svd.getU(), null),
 						   new DTMatrixApacheCommons(svd.getS(), null), 
 						   new DTMatrixApacheCommons(svd.getVT(), null));
@@ -95,10 +87,8 @@ public class DTMatrixApacheCommons implements IDocTermMatrix {
 
 	@Override
 	public void nullifyRows(List<Integer> input) {
-//		double[] arr = new double[this.data.getColumnDimension()];
-//		Arrays.fill(arr, 0);
 		for (int index : input) {
-			this.data.setRowVector(index, new OpenMapRealVector(this.data.getColumnDimension()));
+			this.data.setRowVector(index, new ArrayRealVector(this.data.getColumnDimension()));
 		}
 	}
 
@@ -152,7 +142,7 @@ public class DTMatrixApacheCommons implements IDocTermMatrix {
 	public ITermsVector getColumnData(int index) {
 		//TODO
 		if (this.docIndices != null) {
-			return new TermsVectorApacheCommons(this.docIndices.get(index), this.data.getColumnVector(index));
+			return new TermsVectorApacheCommons(this.docIndices.get(index), this.data.getColumnVector(index).toArray());
 		}
 		return null;
 	}

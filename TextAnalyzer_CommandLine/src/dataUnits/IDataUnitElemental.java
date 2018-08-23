@@ -7,7 +7,6 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.XMLEvent;
 
-import dataUnits.IDataUnit.XMLTags;
 import io.IReadableXML;
 
 public interface IDataUnitElemental extends IDataUnit {

@@ -20,6 +20,7 @@ import crawlers.ICrawler;
 import io.IReadableXML;
 import io.IWriterXML;
 import io.XMLException;
+import utils.Languages;
 import utils.ListMap;
 import utils.PairDataUnitAnalysis;
 import utils.WeightedObject;
@@ -52,12 +53,12 @@ public class DocumentBase implements IDataUnitDoc {
 						} else {
 							if (readingAnalysis) {
 								IAnalysisResult anRes = IAnalysisResult.readXML(reader);
-								if (anRes != null) {
+								if (anRes != null && !anRes.isEmpty()) {
 									anData.put(anRes.getType(), anRes);
 								}
 							} else if (readingData) {
 								IDataUnitElemental doc = (IDataUnitElemental) IDataUnitElemental.createFromXML(reader);
-								if (doc != null) {
+								if (doc != null && !doc.isEmpty()) {
 									docData.put(doc.getKey(), doc);
 								}
 							}
@@ -104,7 +105,7 @@ public class DocumentBase implements IDataUnitDoc {
 	public DocumentBase() {
 		data = new HashMap<String, IDataUnitElemental>();
 		analysis = new ListMap<AnalysisTypes, IAnalysisResult>();
-		this.ID = -1;
+		this.ID = IDataUnitDoc.DEFAULT_ID;
 	}
 
 	public DocumentBase(int id) {
@@ -277,5 +278,19 @@ public class DocumentBase implements IDataUnitDoc {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public Languages getMainLanguage() {
+		if (this.getAnalysisResults(AnalysisTypes.language) == null) {
+			return Languages.unknown;
+		} else {
+			return Languages.fromString(((MetadataModification)this.getAnalysisResults(AnalysisTypes.language).get(0)).getData().last().getData());
+		}
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return (this.data.isEmpty() || (this.data.size() == 1 && this.data.containsKey(RawDataTags.link.getTagText())) && this.analysis.isEmpty());
 	}
 }

@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import analysis.EmptyAnalysis;
 import analysis.IAnalysisResult;
-import analyzers.AnalysisTypes;
 import dataUnits.IDataUnit;
 
 public class PairAnalysisResults {

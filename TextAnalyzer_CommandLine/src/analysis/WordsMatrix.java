@@ -15,11 +15,14 @@ import dataUnits.IDataUnitDoc;
 import io.IWriterXML;
 import linearAlgebra.DTMatrixApacheCommons;
 import linearAlgebra.IDocTermMatrix;
+import linearAlgebra.ITermsVector;
+import linearAlgebra.TermsVectorApacheCommons;
 import utils.Languages;
 
 public class WordsMatrix implements IAnalysisResult, IMultilingual {
 
 	private static final AnalysisTypes type = AnalysisTypes.weightMatrix;
+	private static final double languageThreshold = 0;
 
 	public static IAnalysisResult createFromXML(XMLEventReader reader, AnalysisTypes analysisTypes) {
 		// TODO Auto-generated method stub
@@ -51,7 +54,7 @@ public class WordsMatrix implements IAnalysisResult, IMultilingual {
 
 	public void addDocumentVector(WordsVector input) {
 		for (Languages lang : input.getLanguages()) {
-			if (!this.documents.containsKey(lang)) {
+			if (!this.documents.containsKey(lang) || !this.documentIDs.get(lang).contains(input.getID())) {
 				continue;
 			}
 			int numberOfWords = this.vocabularly.get(lang).size();
@@ -142,10 +145,6 @@ public class WordsMatrix implements IAnalysisResult, IMultilingual {
 		return this.markedFinal;
 	}
 
-//	public Map<String, Integer> getTerms(Languages lang) {
-//		return this.vocabularly.get(lang);
-//	}
-
 	public List<String> getTerms(Languages lang) {
 		return this.vocabularly.get(lang);
 	}
@@ -158,29 +157,31 @@ public class WordsMatrix implements IAnalysisResult, IMultilingual {
 		this.documents = new HashMap<>();
 		this.documentIDs = new HashMap<>();
 		for (IDataUnitDoc doc : docs) {
-			List<IAnalysisResult> docLangs = doc.getAnalysisResults(AnalysisTypes.language);
-			if (docLangs == null || docLangs.size() != 1) {
+			List<IAnalysisResult> analysisResults = doc.getAnalysisResults(AnalysisTypes.weights);
+			if (analysisResults == null || analysisResults.size() != 1) {
 				continue;
 			}
-			if (((MetadataModification)docLangs.get(0)).getData().descendingIterator().next().getWeight() <= 0.5) {
-				continue;
+			for (Languages lang : ((WeightsTable)analysisResults.get(0)).getLanguages()) {
+				List<IDataUnitDoc> listForLang = this.documents.get(lang);
+				List<Integer> idsForLang = this.documentIDs.get(lang);
+				if (listForLang == null) {
+					listForLang = new ArrayList<>();
+				}
+				if (idsForLang == null) {
+					idsForLang = new ArrayList<>();
+				}
+				listForLang.add(doc);
+				idsForLang.add(doc.getID());
+				this.documents.put(lang, listForLang);
+				this.documentIDs.put(lang, idsForLang);
 			}
-			Languages lang = Languages.fromString(((MetadataModification)docLangs.get(0)).getData().descendingIterator().next().getData());
-			List<IDataUnitDoc> listForLang = this.documents.get(lang);
-			List<Integer> idsForLang = this.documentIDs.get(lang);
-			if (listForLang == null) {
-				listForLang = new ArrayList<>();
-			}
-			if (idsForLang == null) {
-				idsForLang = new ArrayList<>();
-			}
-			listForLang.add(doc);
-			idsForLang.add(doc.getID());
-			this.documents.put(lang, listForLang);
-			this.documentIDs.put(lang, idsForLang);
 		}
 	}
 
+	private boolean isLanguageShareHighEnough(MetadataModification input) {
+		return input.getData().descendingIterator().next().getWeight() > languageThreshold;
+	}
+	
 	public void updateDataMatrix(Languages lang, IDocTermMatrix input) throws Exception {
 		if (this.data.containsKey(lang) && input != null) {
 			List<Integer> removedRows = input.removeEmptyRows();
@@ -196,6 +197,22 @@ public class WordsMatrix implements IAnalysisResult, IMultilingual {
 		if (this.documentIDs.containsKey(lang) && doc != null) {
 			return this.documentIDs.get(lang).indexOf(doc.getID());
 		}
-		return -1;
+		return IDataUnitDoc.DEFAULT_ID;
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		return this.data.isEmpty() || this.documents.isEmpty() || this.vocabularly.isEmpty();
+	}
+
+	public ITermsVector createVector(Languages lang, List<String> keywords, double defaultWeight) {
+		if (keywords != null && this.getLanguages().contains(lang)) {
+			Map<String, Double> weights = new HashMap<>();
+			for (String keyword : keywords) {
+				weights.put(keyword, defaultWeight);
+			}
+			return new TermsVectorApacheCommons(ITermsVector.DEFAULT_ID, this.vocabularly.get(lang), weights);
+		}
+		return null;
 	}
 }

@@ -1,0 +1,693 @@
+<?xml version="1.0" ?>
+    <categories>
+        <category catType="categoryBase" name="categoryNew82">
+            <keywords lang="DE">
+                übersicht, statistische, sensorische, müssen, haptische, erzeugen, eigenschaften, bedienelemente, bedienbarkeit, audiosignalverarbeitung, aktoren, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew83">
+            <keywords lang="DE">
+                vorliegen, qualitätsbewusstsein, gleicher, bevorzugt, besetzen, berücksichtigt, vollzeit, teamgeist, schwerbehinderter, presseterminen, pressemappen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew84">
+            <keywords lang="DE">
+                übergreifender, umfelderfassung, systemdesign, ständige, softwareentwicklungsmethoden, promotion, lokalisierung, kfz-elektronik, grundlegendes, gebiet, fahrerassistenzsystemen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew85">
+            <keywords lang="EN">
+                standards, sense, proactivity, hot, audit, wherever, utilization, timely, test, subordinates, shafts, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew134">
+            <keywords lang="EN">
+                și, în, studii, organe, materialelor, engleză, de, cunoștințe, cad, așchiere, avantaj, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew135">
+            <keywords lang="EN">
+                treatment, technical, strength, regarding, realization, obtaining, nx, materials, fits, draws, devices, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew136">
+            <keywords lang="EN">
+                versioning, unit, script, optional, js, jazz, jasmine, essential, db, css, angular, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew80">
+            <keywords lang="DE">
+                vorgehensweisen, tracking, security, ressourcenkritischen, projekten, planung, planen, klassischen, fortschritt, einsätzen, budget, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew81">
+            <keywords lang="DE">
+                teile, reparatur, prüfarbeiten, lokalisierung, kunden, handwerkliches, geschick, festlegen, erneuerung, elektronischen, defekter, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew137">
+            <keywords lang="EN">
+                production, port, plant, logistics, inbound, freight, forwarder, damages, controlling, claims, case, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew130">
+            <keywords lang="EN">
+                validation, capl, canoe, body, simulation, scripting, exposure, virtual, using, system, software, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew79">
+            <keywords lang="DE">
+                informationssysteme, daten, zukunftsorientierten, teamorientiertes, spürbare, simulationssoftware, optimieren, netzwerkbetreuung, messfahrten, konzipieren, kommunizieren, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew131">
+            <keywords lang="EN">
+                trucks, platform, iot, connectivity, always, connect, transportation, cloud, azure, buses, security, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew132">
+            <keywords lang="EN">
+                payment, weaknesses, treasury, teamworker, statutory, self, returns, retail, resolution, remittances, relating, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew133">
+            <keywords lang="EN">
+                transformation, risks, risk, reputational, digital, context, compliance, arising, comparable, assessment, new, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew75">
+            <keywords lang="DE">
+                unterstützen, mitarbeiten, marken, immatrikulation, sourcing, maybach, marketing, bwl, zubehör, vertrieb, verhandlungen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew76">
+            <keywords lang="DE">
+                anlagen, warten, softwarekomponenten, sachgerechter, räumliches, reparatur, qualitätsmanagements, mechatronischen, mechanik, maschinen, komplexen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew77">
+            <keywords lang="DE">
+                werk, hamburg, untertürkheim, rund, rastatt, modelle, serienfertigung, produktionsbereichen, kompetenzzentrum, kassel, innenhochdruckumformung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew78">
+            <keywords lang="DE">
+                zertifizierter, zdk, vermittlung, verkäufer, verkaufsteams, verkauf, selbst, kundenbindung, förderung, einkommen, besten, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew71">
+            <keywords lang="DE">
+                stuttgart, reisemobile, alles, niederlassung, führung, darunter, überwachung, übergabe, zugeordneten, wartungs, veranlassung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew72">
+            <keywords lang="DE">
+                äj, veranlassen, selektieren, nachgelagerten, maßnahmen, linienbereichen, kosten, e-klasse, bzgl, beschluss, beantragung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew73">
+            <keywords lang="DE">
+                marketing, vans, events, x-klasse, smart, schwerpunktmäßig, produktrelevanten, märkten, medien, marketing-mix, implikationen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew74">
+            <keywords lang="DE">
+                verschiedener, vergleich, verfahrenstechnik, validierungsversuchen, validierung, thermodynamik, raumfahrttechnik, modellierungskonzepte, lithium-ionen, evaluation, batterien, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew70">
+            <keywords lang="DE">
+                lernen, räumliches, oberflächen, man, kontrolliert, hydraulik, geschützt, geprüft, führen, erfahren, bauteile, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew68">
+            <keywords lang="DE">
+                weiterleiten, optimalen, ausstellungsbereich, verwaltung, verwahrung, versorgung, versendung, verkaufsinfotheken, verbundene, telefonische, sauberkeit, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew69">
+            <keywords lang="DE">
+                zählen, wochenende, termin, neu-ulm, kundenkontaktbereich, kompetentes, gültigen, freundliches, drei, bestenfalls, beschäftigung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew64">
+            <keywords lang="DE">
+                lkw, trucks, schulungsveranstaltungen, retail, obersten, nutzfahrzeugen, mbvd, marken, journalisten, deutschlandweit, deutschland, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew65">
+            <keywords lang="DE">
+                weiterentwicklung, ständige, energiemanagements, energiemanagement, energieeffizienz, competence-center, standortübergreifend, mitarbeit, generelles, zunehmend, wirtschaftlichkeitsbetrachtung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew66">
+            <keywords lang="DE">
+                ihnen, zdk, vwl, verkäufer, smart, schritt, praxis, kommen, hochschule, fremdsprachen, endet, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew67">
+            <keywords lang="DE">
+                medientechnik, fertigkeiten, elearning, webbasierten, verfügen, unbedingt, standort, seminaren, organisierte, didaktische, zielgruppenorientierte, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew116">
+            <keywords lang="EN">
+                test, testing, navigation, country, telematics, suppliers, korean, rd, korea, infotainment, http, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew117">
+            <keywords lang="EN">
+                incident, security, resolution, management, major, lead, itil, incidents, handler, event, escalations, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew118">
+            <keywords lang="EN">
+                web, studio, service, pki, interoperable, independence, iis, establishing, cryptography, certificates, applications, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew119">
+            <keywords lang="EN">
+                scripting, exposure, good, based, model, autosar, targetlink, simulink, programming, matlab, maab, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew112">
+            <keywords lang="EN">
+                assembly, tenacity, sta, production, manufacturing, gives, command, asset, addicted, planning, electromechanics, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew113">
+            <keywords lang="EN">
+                sap, rollout, vms, vdz, usage, two, target, synergies, stakeholders, sd, regional, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew114">
+            <keywords lang="EN">
+                în, sau, primă, piese, pentru, mobilă, intern, fi, de, cu, care, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew115">
+            <keywords lang="EN">
+                resources, quotas, productive, performing, measuring, machinery, examinations, errors, completeness, checking, checkers, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew17">
+            <keywords lang="IDK">
+                shop, production, mer, fachabteilung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew18">
+            <keywords lang="IDK">
+                znajomość, zadań, utrzymania, pracy, potrzeby, podległość, organizacja, na, dokumentów, dobre, bardzo, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew19">
+            <keywords lang="IDK">
+                requirements, mer, fachabteilung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew13">
+            <keywords lang="IDK">
+                znajomość, zarządzanie, stellennummer, rzetelność, pracy, mer, gotowość, etyczne, dobra, do, chęć, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew14">
+            <keywords lang="IDK">
+                znajomość, zakresu, szybkiego, skrawaniem, procesów, oraz, nowych, maszyn, dobra, do, chęć, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew110">
+            <keywords lang="EN">
+                în, de, acestora, și, întocmirea, un, tehnică, scopul, sau, reparații, pentru, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew15">
+            <keywords lang="IDK">
+                sta, hr, fachabteilung, business, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew111">
+            <keywords lang="EN">
+                mobility, transportation, product, portfolio, path, pain, marketing, house, go, digital, car, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew16">
+            <keywords lang="IDK">
+                use, office, mer, maintenance, fachabteilung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew97">
+            <keywords lang="EN">
+                és, versenyképes, szakmai, személyiség, ponttal, maximum, jutattással, alapbéren, hu, támogatás, ismeretek, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew98">
+            <keywords lang="EN">
+                security, dfs, cybersecurity, vulnerabilities, remediation, protection, data, vulnerability, specialist, hq, cyber, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew10">
+            <keywords lang="IDK">
+                tätigkeitsbereich, office, ms, min, mer, max, hu, heti, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew99">
+            <keywords lang="EN">
+                vans, sprinter, charleston, llc, plant, metris, production, supplier, sequence, mercedes-benz, material, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew11">
+            <keywords lang="IDK">
+                nfz, fachrichtung, fachabteilung, berufsausbildung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew12">
+            <keywords lang="IDK">
+                hamburg, fachabteilung, chain, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew93">
+            <keywords lang="EN">
+                required, trucks, manufacturing, orders, material, maintenance, repair, parts, north, hydraulic, equipment, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew127">
+            <keywords lang="EN">
+                meetings, feasibility, client, xml, stack, peer, nice, nat, know, java, how, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew94">
+            <keywords lang="EN">
+                visit, readysc, posting, org, open, mercedes, like, http, currently, candidates, attending, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew128">
+            <keywords lang="EN">
+                diagnostics, diagnostic, validation, tool-xentry, test, specifically, software, routines, project, mbrdi, lifecycle, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew95">
+            <keywords lang="EN">
+                és, max, aktív, min, való, kapcsolatos, az, jó, folyamatok, felhasználói, beérkező, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew129">
+            <keywords lang="EN">
+                websphere, webserver, shooting, server, release, linux, ee, deployment, db, bash, application, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew96">
+            <keywords lang="EN">
+                fuso, mitsubishi, japanese, project, truck, steering, series, projects, lead, further, changes, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew123">
+            <keywords lang="EN">
+                financial, services, controlling, dfs, project, mbfs, data, analytics, stakeholders, reporting, digital, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew90">
+            <keywords lang="EN">
+                mbrdna, research, design, yrs, cloud, center, software, millions, distributed, testing, powertrain, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew124">
+            <keywords lang="EN">
+                ivi, vector, test, sequences, script, provetech, programming, ni, mca, mandatory, integration, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew91">
+            <keywords lang="EN">
+                workflow, weaver, sap, net, multi-site, html, gateway, fiori, estimates, enhancement, abap, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew125">
+            <keywords lang="EN">
+                version, pki, migration, master, integrated, infrastructure, forest, examples, dns, directory, ad, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew92">
+            <keywords lang="EN">
+                insurance, wise, transformation, tgt, strategic, services, profound, preferably, navigate, mercedes, markets, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew126">
+            <keywords lang="EN">
+                sw, transmission, product, powertrain, mil, hil, electronics, control, body, vehicle, validation, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew120">
+            <keywords lang="EN">
+                routing, release, registration, planning, layout, installation, drawings, dmu, cvdaei, creation, component, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew121">
+            <keywords lang="EN">
+                variables, sap, query, objects, extractors, extraction, exposure, designer, bo, bi, bex, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew122">
+            <keywords lang="EN">
+                sap, modules, user, taxes, security, relative, processing, portal, payment, module, mass, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew86">
+            <keywords lang="EN">
+                media, marketing, digital, content, social, pr, platforms, events, corporate, communications, campaigns, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew87">
+            <keywords lang="EN">
+                sales, employee, australia, permanent, dealer, customer, fleet, dealership, customers, role, procedures, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew88">
+            <keywords lang="EN">
+                scrum, agile, server, java, india, hands, dfs, case, biggest, aap, used, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew89">
+            <keywords lang="EN">
+                thorough, planning, manufacturing, production, procedures, coordinating, taking, stream, problem-solving, measure, lean, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew40">
+            <keywords lang="DE">
+                pdm, methoden, geometrie, edm, cax-datenverfügbarkeit, verkürzung, stücklisten, serien, rundet, referenzfahrzeugen, prozesskette, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew41">
+            <keywords lang="DE">
+                per, entwurf, animationen, adobe, user, serien, kommunikationsdesign, intuitiv, interaktionsgestaltung, icons, hochwertiger, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew39">
+            <keywords lang="DE">
+                zeitraum, schule, nachweis, berücksichtigt, mm, falls, wochen, wechselschicht, tt, logistik-center, ggf, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew35">
+            <keywords lang="DE">
+                immatrikuliert, wirtschaftsrecht, vorstellungsgesprächen, teamarbeit, personalmanagement, grundstudium, tagesgeschäfts, abteilungsinternen, weiterleitung, vorerfahrung, veröffentlichung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew36">
+            <keywords lang="DE">
+                lean, supply, werken, logistik, chain, sindelfingen, werkstoffe, trucks, simulationen, projekt, mps, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew37">
+            <keywords lang="DE">
+                vornehmen, wartungsarbeiten, umgangsformen, transporter, omnibus, karosserieteile, justieren, instandsetzung, getriebe, anschließender, warten, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew38">
+            <keywords lang="DE">
+                protokollen, zusammenfassung, vs, projektstand, projektkoordination, office-programmen, marktanalysen, kommunikation, immatrikuliert, erstellung, erprobungen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew31">
+            <keywords lang="DE">
+                security, informationssicherheit, information, governance, cyber, zentralfunktion, it-security, informationen, geeigneten, strategie, mobile, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew32">
+            <keywords lang="DE">
+                unternehmensberatung, things, text, startup, potentiellen, multimedia, masterarbeit, lösungsansätze, lebenslauf, immatrikulierte, hochmotiviertes, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew33">
+            <keywords lang="DE">
+                anwendungsbereite, wirtschaftsingenieur-wesen, sicherstellung, reibungslosen, produktionsanlagen, montage, kvp, engpässen, betriebsmitteln, vorschlägen, vorgabe, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew34">
+            <keywords lang="DE">
+                data, analytics, big, machine, learning, business, warehouse, use, transportation, predictive, optimalerweise, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew105">
+            <keywords lang="EN">
+                css, javascript, html, website, web-development, web, mobile, js, go, backend, app, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew106">
+            <keywords lang="EN">
+                training, vat, ttt, treatment, transparency, tax, strategically, skill, revenue, program, profound, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew107">
+            <keywords lang="EN">
+                la, en, de, condición, vba, sla, robots, producción, payments, para, más, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew30">
+            <keywords lang="DE">
+                visualisierung, medien, visualisierungsfähigen, virtual, verfügen, preparation, maya, d-szenen, blender, autodesk, aufbereitung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew108">
+            <keywords lang="EN">
+                so, skill, service, online, mainly, inbound, handling, enquiries, customer, calls, additionally, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew101">
+            <keywords lang="EN">
+                mbusi, supplier, gle, natural, inc, university, material, vda, supply, suppliers, studies, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew102">
+            <keywords lang="EN">
+                és, végrehajtása, részvétel, mer, megfelelően, mbsa, manufacturing, kecskeméti, hu, gyártás, csapatunkhoz, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew103">
+            <keywords lang="EN">
+                credit, wholesale, unknown, underwriting, topics, style, studies, situation, sales, risk, post, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew104">
+            <keywords lang="EN">
+                önálló, és, végzettség, termelési, technikusi, szakmai, készség, komplex, iránti, elkötelezettség, berendezések, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew109">
+            <keywords lang="EN">
+                parts, logistics, vpc, suppliers, repair, production, phase, pacific, gsp, dealer, action, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew28">
+            <keywords lang="DE">
+                bank, kunden, financial, umfassende, rechnungslegung, leasing, eingebunden, attraktive, während, verknüpfungen, verkauf, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew29">
+            <keywords lang="DE">
+                social, media, pr, marketing, presse, absolvierst, woche, studiums, stab, kommunikation, global, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew24">
+            <keywords lang="DE">
+                hier, bremen, band, t-modell, glk, slc, prozess, mithilfe, coupé, änderungsmanagements, werksinternen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew25">
+            <keywords lang="DE">
+                kontrollieren, folgende, entgegennehmen, anerkannten, woche, vorgaben, vorbereiten, veranstaltungen, tätigkeitsgebiet, telefonbuchs, telefon, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew26">
+            <keywords lang="DE">
+                prüfungsleistungen, vorweisen, praktikumszeitraums, nachweis, praktikanten, kontaktfähigkeit, buses, bitte, zielgruppenspezifische, werkserweiterung, veranstaltungsmanagement, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew100">
+            <keywords lang="EN">
+                ll, alongside, whilst, uk, retail, recruitment, range, helping, used, sales, retailers, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew27">
+            <keywords lang="DE">
+                einkommen, wirtschaftswissenschaftlicher, cafeteria, kostenlose, manufacturing, lösungsorientiert, interpretieren, logistiksystemen, logistikdienstleistern, lean-prinzipien, arbeitsplatz, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew20">
+            <keywords lang="DE">
+                elektrischen, versuchsfahrten, telematik, simulation, rd, mechanischen, komponenten, fahren, beinhaltet, auslegung, zukunft, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew21">
+            <keywords lang="DE">
+                mobility, services, übernimmst, mobilität, unterstützt, arbeitest, vans, payment, pay, möchtest, mobilitätslösungen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew22">
+            <keywords lang="DE">
+                controlling, rechnungswesen, mbc, methoden, supply, reporting, powertrain, internationalen, compliance, werken, sap, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew23">
+            <keywords lang="DE">
+                zusammen, arbeitest, applikationen, verfügst, ios, entwickelst, nativen, mobile, apps, unterstützt, sehr, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew60">
+            <keywords lang="DE">
+                systeme, steuergeräte, spanisch, projektarbeit, programmierkenntnisse, internationaler, integrationsfähigkeit, fahrzeugkenntnisse, elektronische, datenanalyse, bigdata, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew61">
+            <keywords lang="DE">
+                controlling, fragestellungen, rechnungswesen, projektcontrolling, gesellschaften, betriebswirtschaftlichen, vertiefte, unterjährige, trucks, reporting, plan, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew62">
+            <keywords lang="DE">
+                reality, augmented, computer, verfügen, verstehen, verortung, softwareentwickler, realisierung, qt, problemlösungsorientierte, industrie, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew63">
+            <keywords lang="DE">
+                cloud, betrieb, services, systems, product, devops, business, spm, recruiting, problemlösungsorientiertes, neue, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew1">
+            <keywords lang="IDK">
+                mer, fachabteilung, infrastructure, de, ddy, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew0">
+            <keywords lang="IDK">
+                mer, matric, finance, fachabteilung, controlling, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew7">
+            <keywords lang="IDK">
+                technische, forschung, fachabteilung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew6">
+            <keywords lang="IDK">
+                şi, închide, în, stellennummer, sta, office, ms, de, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew9">
+            <keywords lang="IDK">
+                és, stellennummer, shop, mer, jutattással, hu, àllandó, előny, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew8">
+            <keywords lang="IDK">
+                logistischer, fachabteilung, chain, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew3">
+            <keywords lang="IDK">
+                znajomość, wsparcie, spółkę, sprawozdań, potrzeby, podatków, oraz, dotyczących, dobre, dobra, do, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew2">
+            <keywords lang="IDK">
+                znajomość, zakresie, procesów, polityk, opisów, instrukcji, dotyczących, dobre, dobra, będzie, atutem, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew5">
+            <keywords lang="IDK">
+                znajomość, wymagana, umów, rzetelność, projektów, pracy, ms, języka, etyczne, dodatkowym, będzie, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew4">
+            <keywords lang="IDK">
+                grund, fachabteilung, controlling, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew57">
+            <keywords lang="DE">
+                zellen, versuchsplanung, objektorientierter, motivation, messdaten, lösung, li-ionen, grundkenntnisse, erreichen, englischen, beste, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew58">
+            <keywords lang="DE">
+                kontaktfähigkeit, microsoft-office, gewissenhaftigkeit, volkswirtschaft, produktionstechnik, preisanalyse, neuordnung, montage, kommunikationsunterlagen, evobus, disposition, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew59">
+            <keywords lang="DE">
+                health, dienst, arzt, werksärztlicher, weiterbildung, wd, vorsorge, untersuchungen, standort, standardmaßnahmen, sindelfingen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew53">
+            <keywords lang="DE">
+                xml, vorteilhaft, star, standardisierten, erstellen, elemente, datenbankabfragen, datenbank, cubeschema, bi, anpassung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew54">
+            <keywords lang="DE">
+                einsatzfreude, ba, state-of-the-art, übersetzen, zellen, workbench, wissen, validierung, unserem, umsetzen, trainees, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew55">
+            <keywords lang="DE">
+                lieferanten, mp, entwicklungsphase, einkauf, bemusterung, gewährleisten, zulieferpartnern, supplier, qualität, ihrer, globalen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew56">
+            <keywords lang="DE">
+                net, wirtschaftspädagogik, wirtschaftspsychologie, vorhandenen, visual, sql, psychologie, prozessprojekten, prozessoptimierung, programmieren, programmen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew50">
+            <keywords lang="DE">
+                muss, überwacht, übernimmt, zeitpunkt, welchen, wasserstoff, vormontage, vollständigkeit, verifiziert, vefk, technologiebetreuung, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew51">
+            <keywords lang="DE">
+                sap, level, financial, definition, accounting, abap, übersicht, zwingend, werk, websites, vorgesehen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew52">
+            <keywords lang="DE">
+                simulink, matlab, simulation, gui, vereinfachten, vba, validierung, tool, thermische, soll, sinnvoll, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew46">
+            <keywords lang="DE">
+                customer, services, internetaffinität, beratungsprojekten, beratungskonzepten, grad, vorgehensmodellen, serviceorientiertes, prozessdesign, prototyping, projektbezogenen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew47">
+            <keywords lang="DE">
+                thailand, qualitätsplanung, qualitäts, projektkoordination, ckd, brasilien, betreuung, anlaufplanung, abteilungsübergreifenden, rohbau, pcpba, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew48">
+            <keywords lang="DE">
+                berlin, group, services, offene, individuelle, folgende, service, rechnungswesen, einarbeitung, gmbh, dgsb, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew49">
+            <keywords lang="DE">
+                sicherstellen, gesellschaftsrecht, fachbereiche, datenschutz, wirtschaftsjurist, vorbereiten, volljurist, verfügen, stellungnahmen, richtlinien, prüfungen, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew42">
+            <keywords lang="DE">
+                verantwortungsvoll, untersuchen, straßenverkehrsrechtlichen, setzen, man, lernen, instand, eingestellt, geprüft, karosserie, diagnostizieren, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew43">
+            <keywords lang="DE">
+                vorbereitet, talent, man, lernen, kommunikationstechniken, herstellung, gewährleistet, dauert, bewertet, bauteile, informations, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew44">
+            <keywords lang="DE">
+                fleetboard, vordiplom, umbau, softwarekomponenten, skriptkenntnisse, security, scrum, kraftstoffverbrauch, javascript, java, db, 
+            </keywords>
+        </category>
+        <category catType="categoryBase" name="categoryNew45">
+            <keywords lang="DE">
+                lernen, kluge, verwaltungssysteme, nutzen, einzusetzen, solides, logistik-transportmittel, lager, bereitet, interesse, anwenden, 
+            </keywords>
+        </category>
+    </categories>

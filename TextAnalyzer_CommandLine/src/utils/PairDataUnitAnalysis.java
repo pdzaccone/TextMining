@@ -4,7 +4,6 @@ import java.util.List;
 
 import analysis.IAnalysisResult;
 import analyzers.AnalysisTypes;
-import analyzers.IAnalyzer;
 import dataUnits.IDataUnit;
 
 public class PairDataUnitAnalysis {

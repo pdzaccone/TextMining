@@ -1,5 +1,5 @@
 package io;
 
 public interface ISaveableXML {
-	boolean writeToXML(IWriterXML writer);
+	public boolean writeToXML(IWriterXML writer);
 }

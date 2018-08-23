@@ -44,9 +44,11 @@ public class ReaderJSONData implements IReader {
 					} else {
 						String key = parser.getString();
 						parser.next();
-						String value = parser.getString();
-						dusp = new DataUnitElementalBase(key, value);
-						((IDataUnitDoc)documents.get(documents.size() - 1)).addData(key, dusp);
+						String value = parser.getString().trim();
+						if (!value.isEmpty()) {
+							dusp = new DataUnitElementalBase(key, value);
+							((IDataUnitDoc)documents.get(documents.size() - 1)).addData(key, dusp);
+						}
 					}
 				}
 			}
@@ -56,6 +58,19 @@ public class ReaderJSONData implements IReader {
 		} 
 		catch (IOException e) {
 			Ok = false;
+		}
+		if (Ok) {
+			List<IReadable> toRemove = new ArrayList<>();
+			for (IReadable doc : documents) {
+				if (doc instanceof IDataUnitDoc) {
+					if (((IDataUnitDoc)doc).isEmpty()) {
+						toRemove.add(doc);
+					}
+				}
+			}
+			for (IReadable obj : toRemove) {
+				documents.remove(obj);
+			}
 		}
 		return Ok;
 	}

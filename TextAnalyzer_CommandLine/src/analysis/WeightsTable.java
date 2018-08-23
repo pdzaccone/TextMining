@@ -18,13 +18,12 @@ import analyzers.AnalysisTypes;
 import dataUnits.IDataUnit;
 import filters.IWeightsFilter;
 import io.IWriterXML;
-import io.XMLException;
 import utils.Languages;
 import utils.WeightedObject;
 
 public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 	
-	private static final long thresholdSaveXML = 50;
+//	private static final long thresholdSaveXML = 50;
 	private static final AnalysisTypes type = AnalysisTypes.weights;
 
 	private static final String separatorTerms = ";";
@@ -120,17 +119,17 @@ public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 		return result;
 	}
 
-	private static String convertToString(Map<String, Double> input) {
-		StringBuilder sb = new StringBuilder();
-		TreeSet<WeightedObject> tree = new TreeSet<>();
-		input.entrySet().stream().forEach(val -> tree.add(new WeightedObject(val.getKey(), val.getValue())));
-		Iterator<WeightedObject> it = tree.descendingIterator();
-		while (it.hasNext()) {
-			WeightedObject obj = it.next();
-			sb.append(String.format("%s %s %.2f%s ", obj.getData(), separatorParams, obj.getWeight(), separatorTerms));
-		}
-		return sb.toString();
-	}
+//	private static String convertToString(Map<String, Double> input) {
+//		StringBuilder sb = new StringBuilder();
+//		TreeSet<WeightedObject> tree = new TreeSet<>();
+//		input.entrySet().stream().forEach(val -> tree.add(new WeightedObject(val.getKey(), val.getValue())));
+//		Iterator<WeightedObject> it = tree.descendingIterator();
+//		while (it.hasNext()) {
+//			WeightedObject obj = it.next();
+//			sb.append(String.format("%s %s %.2f%s ", obj.getData(), separatorParams, obj.getWeight(), separatorTerms));
+//		}
+//		return sb.toString();
+//	}
 
 	private static Map<String, Double> convertFromString(String input) {
 		Map<String, Double> result = new HashMap<>();
@@ -216,10 +215,22 @@ public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 	@Override
 	public IAnalysisResult calculateTFIDF(IWeightedAnalysis corpus) {
 		WeightsTable result = new WeightsTable();
+		double min = Double.MAX_VALUE;
+		String minW = "";
+		double max = Double.MIN_VALUE;
+		String maxW = "";
 		if (corpus instanceof WeightsTable) {
 			for (Languages lang : this.data.keySet()) {
 				for (String term : this.getDataForLanguage(lang).keySet()) {
 					double tfidf = this.getDataForLanguage(lang).get(term) * ((WeightsTable)corpus).getDataForLanguage(lang).get(term);
+					if (tfidf < min) {
+						min = tfidf;
+						minW = term;
+					}
+					if (tfidf > max) {
+						max = tfidf;
+						maxW = term;
+					}
 					result.add(lang, term, tfidf);
 				}
 			}
@@ -315,5 +326,10 @@ public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 	@Override
 	public boolean isFinal() {
 		return markedFinal;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return this.data.isEmpty();
 	}
 }

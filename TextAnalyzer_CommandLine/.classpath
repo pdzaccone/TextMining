@@ -6,5 +6,9 @@
 	<classpathentry kind="lib" path="C:/Users/Pdz/Downloads/commons-math3-3.6.1/commons-math3-3.6.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Pdz/Downloads/commons-math3-3.6.1/commons-math3-3.6.1.jar" sourcepath="C:/Users/Pdz/Downloads/commons-math3-3.6.1"/>
 	<classpathentry kind="lib" path="C:/Users/Pdz/Downloads/commons-math3-3.6.1/commons-math3-3.6.1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pdz/Downloads/poi-bin-3.17-20170915/poi-3.17/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pdz/Downloads/poi-bin-3.17-20170915/poi-3.17/poi-ooxml-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pdz/Downloads/commons-collections4-4.2-bin/commons-collections4-4.2/commons-collections4-4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pdz/Downloads/xmlbeans-bin-3.0.0/xmlbeans-3.0.0/lib/xbean.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

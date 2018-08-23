@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
     <config>
         <pathCategories>
-            C:\Users\Pdz\eclipse-workspace\TextAnalyzer_CommandLine
+            C:\Users\Pdz\eclipse-workspace\TextAnalyzer_CommandLine\categories\categories_good.xml
         </pathCategories>
         <pathData>
             C:\Users\Pdz\eclipse-workspace\TextAnalyzer_CommandLine\data

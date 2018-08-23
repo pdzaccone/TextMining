@@ -1,0 +1,5 @@
+1 - original 71 docs, KMeans Cosine (threshold = 0.9), with list of bad words, count adjusted, no tfidf filter
+2 - original, approximately 50% of the initial file (~1200), KMeans cosine (threshold = 0.95), with list, no languages, no tfidf filter, count adjusted - approx. 1:15
+3 - original, approximately 50% of the initial file (~1200), KMeans cosine (threshold = 0.95), with list, with languages (recognition precision is 0.8), no tfidf filter, count adjusted - approx 0:20
+4 - original, approximately 50% of the initial file (~1200), KMeans cosine (threshold = 0.8), with list, with languages (recognition precision is 0.8), no tfidf filter, count adjusted - approx 0:25
+5 - original, approximately 50% of the initial file (~1200), KMeans cosine (threshold = 0.5), with list, with languages (recognition precision is 0.8), no tfidf filter, count adjusted - approx 0:25

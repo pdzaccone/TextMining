@@ -1,11 +1,12 @@
 package io;
 
-import categories.ICategory;
+import analysis.ICategory;
 import dataUnits.IDataUnit;
 import utils.ConfigurationData;
 
 public enum XMLEntities {
 	category(ICategory.XMLTags.category.getTagText()),
+	categories(ICategory.XMLTags.categories.getTagText()),
 	corpus(IDataUnit.XMLTags.corpus.getTagText()),
 	config(ConfigurationData.configTag);
 	

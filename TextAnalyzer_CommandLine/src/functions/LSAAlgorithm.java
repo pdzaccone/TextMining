@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import analysis.IAnalysisResult;
 import analysis.WordsMatrix;
 import analyzers.AnalysisTypes;
 import dataUnits.IDataUnitCorpus;
@@ -27,7 +28,8 @@ public class LSAAlgorithm implements IWeightsToDistancesConverter {
 	@Override
 	public void initializeData(IDataUnitCorpus input) {
 		Objects.requireNonNull(input);
-		if (input.getAnalysisResults(AnalysisTypes.weightMatrix).size() == 1) {
+		List<IAnalysisResult> analysisResults = input.getAnalysisResults(AnalysisTypes.weightMatrix);
+		if (analysisResults != null && analysisResults.size() == 1) {
 			this.data = (WordsMatrix) input.getAnalysisResults(AnalysisTypes.weightMatrix).get(0);
 		}
 	}

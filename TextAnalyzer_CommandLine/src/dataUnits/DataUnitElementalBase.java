@@ -1,6 +1,5 @@
 package dataUnits;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,12 +10,10 @@ import javax.xml.stream.events.XMLEvent;
 
 import analysis.IAnalysisResult;
 import analyzers.AnalysisTypes;
-import crawlers.ICrawler;
 import io.IReadableXML;
 import io.IWriterXML;
 import io.XMLException;
 import utils.ListMap;
-import utils.PairDataUnitAnalysis;
 
 public class DataUnitElementalBase implements IDataUnitElemental {
 
@@ -57,7 +54,7 @@ public class DataUnitElementalBase implements IDataUnitElemental {
 						} else {
 							if (readingAnalysis) {
 								IAnalysisResult anRes = IAnalysisResult.readXML(reader);
-								if (anRes != null) {
+								if (anRes != null && !anRes.isEmpty()) {
 									anData.put(anRes.getType(), anRes);
 								}
 							}
@@ -89,7 +86,7 @@ public class DataUnitElementalBase implements IDataUnitElemental {
 		catch (Exception e) {
 			Ok = false;
 		}
-		if (Ok) {
+		if (Ok && !data.isEmpty() && !anData.isEmpty()) {
 			result = new DataUnitElementalBase(key, data);
 			result.addAllAnalysis(anData);
 		}
@@ -101,8 +98,8 @@ public class DataUnitElementalBase implements IDataUnitElemental {
 	private ListMap<AnalysisTypes, IAnalysisResult> analysis;
 	
 	public DataUnitElementalBase(String key, String value) {
-		this.key = key;
-		this.data = value;
+		this.key = key.trim();
+		this.data = value.trim();
 		this.analysis = new ListMap<>();
 	}
 
@@ -203,5 +200,10 @@ public class DataUnitElementalBase implements IDataUnitElemental {
 		return this.analysis.keySet().contains(type) 
 				&& this.analysis.get(type).size() == 1 
 				&& this.analysis.get(type).get(0).isFinal();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return this.data.isEmpty() && this.analysis.isEmpty();
 	}
 }

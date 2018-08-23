@@ -7,8 +7,6 @@ import java.util.Set;
 
 import javax.xml.stream.XMLEventReader;
 
-import org.apache.commons.math3.linear.SparseRealVector;
-
 import analyzers.AnalysisTypes;
 import dataUnits.IDataUnit;
 import io.IWriterXML;
@@ -112,5 +110,10 @@ public class WordsVector implements IAnalysisResult, IMultilingual {
 	@Override
 	public boolean isFinal() {
 		return this.markedFinal;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return this.data.isEmpty();
 	}
 }

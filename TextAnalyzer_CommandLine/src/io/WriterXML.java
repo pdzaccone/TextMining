@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.Objects;
 
 import javax.xml.stream.XMLOutputFactory;
@@ -61,6 +62,45 @@ public class WriterXML implements IWriterXML {
 			writer.writeStartDocument();
 			if (data != null) {
 				Ok = data.writeToXML(this);
+			}
+			if (Ok) {
+				writer.writeEndDocument();
+			}
+		}
+		catch (Exception e) {
+			Ok = false;
+		}
+		return Ok;
+	}
+
+	@Override
+	public boolean writeToFile(String filename, Collection<ISaveableXML> data, String rootTag, boolean deleteIfExists) {
+		boolean Ok = true;
+		XMLOutputFactory factory = XMLOutputFactory.newInstance();
+		
+		try {
+			if (deleteIfExists) {
+				if (Files.exists(Paths.get(filename))) {
+					Files.delete(Paths.get(filename));
+				}
+			}
+		} catch (IOException e) {
+			return false;
+		}
+		
+		try (OutputStream os = new BufferedOutputStream(new FileOutputStream(filename)))
+		{
+			writer = factory.createXMLStreamWriter(os, StandardCharsets.UTF_8.name());
+			writer.writeStartDocument();
+			if (data != null) {
+				writeStartElement(rootTag);
+				for (ISaveableXML dataBlock : data) {
+					Ok = dataBlock.writeToXML(this);
+					if (!Ok) {
+						break;
+					}
+				}
+				writeEndElement();
 			}
 			if (Ok) {
 				writer.writeEndDocument();

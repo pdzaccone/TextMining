@@ -31,6 +31,11 @@ public class EmptyAnalysis implements IAnalysisResult {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean isEmpty() {
+		return true;
+	}
 	
 //	@Override
 //	public boolean equals(Object obj) {
