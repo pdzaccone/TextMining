@@ -23,11 +23,28 @@ import linearAlgebra.ITermsVector;
 import utils.Languages;
 import utils.ListMap;
 
+/**
+ * Standard "category" data
+ * @author Pdz
+ *
+ */
 public class CategoryImpl implements ICategory {
 	
+	/**
+	 * Defines analysis type
+	 */
 	public static final AnalysisTypes type = AnalysisTypes.categoryWords;
+	
+	/**
+	 * Type tag, used to identify type of category implementation in XML-file 
+	 */
 	public static final String typeTag = "categoryBase";
 
+	/**
+	 * This method reads category data using the provided {@link XMLEventReader}
+	 * @param reader XML-reader, with its "cursor" positioned at the beginning of this category object
+	 * @return Resulting {@link ICategory} object or null
+	 */
 	public static ICategory createFromXML(XMLEventReader reader) {
 		ICategory result = null;
 		boolean readingKeywords = false;
@@ -108,21 +125,47 @@ public class CategoryImpl implements ICategory {
 		return result;
 	}
 	
+	/**
+	 * Category name
+	 */
 	private String name;
-	private ListMap<Languages, String> keywords;
-	private Map<Languages, ITermsVector> vectors;
-	private boolean markedFinal; 
 	
+	/**
+	 * Keywords, grouped by language
+	 */
+	private ListMap<Languages, String> keywords;
+	
+	/**
+	 * Keywords, presented as term-vectors
+	 */
+	private Map<Languages, ITermsVector> vectors;
+	
+	/**
+	 * Whether the category is marked final (meaning, that it will not be updated during this session)
+	 */
+	private boolean markedFinal; 
+
+	/**
+	 * Constructor without parameters
+	 */
 	public CategoryImpl() {
 		init("");
 	}
 
+	/**
+	 * Constructor
+	 * @param catName Category name
+	 */
 	public CategoryImpl(String catName) {
 		init(catName);
 	}
 	
-	private void init(String categoryName) {
-		this.name = categoryName;
+	/**
+	 * Initializes category with default values
+	 * @param catName Category name
+	 */
+	private void init(String catName) {
+		this.name = catName;
 		this.keywords = new ListMap<>();
 		this.vectors = new HashMap<>();
 		this.markedFinal = false;
@@ -208,6 +251,11 @@ public class CategoryImpl implements ICategory {
 		return this.keywords.keySet();
 	}
 
+	/**
+	 * Generates a language specific category description in format {keyword}{separator}{...}
+	 * @param lang Language
+	 * @return Resulting string, describing the category
+	 */
 	private String generateString(Languages lang) {
 		StringBuilder sb = new StringBuilder();
 		for (String s : this.keywords.get(lang)) {

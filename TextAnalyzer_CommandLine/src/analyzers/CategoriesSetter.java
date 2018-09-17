@@ -23,12 +23,32 @@ import utils.PairAnalysisResults;
 import utils.WeightedMap;
 import utils.WeightedObject;
 
+/**
+ * This {@link IAnalyzer} simulates calculation of categories. It reads predefined categories from a provided Excel file 
+ * @author Pdz
+ *
+ */
 public class CategoriesSetter implements ICategorizer {
 
+	/**
+	 * Predefined categories - document IDs are used as keys and categories are stored as values
+	 */
 	private Map<String, String> categories;
+	
+	/**
+	 * Whether the {@link IAnalyzer} has been initialized successfully
+	 */
 	private boolean isInitialized;
+	
+	/**
+	 * Whether the {@link IAnalyzer} should overwrite existing category data 
+	 */
 	private final boolean shouldOverwrite;
 	
+	/**
+	 * Constructor with parameter
+	 * @param overwrite Whether the {@link IAnalyzer} should overwrite existing category data
+	 */
 	public CategoriesSetter(boolean overwrite) {
 		this.categories = new HashMap<>();
 		this.isInitialized = false;
@@ -84,7 +104,12 @@ public class CategoriesSetter implements ICategorizer {
 		return results;
 	}
 	
-	public void readPredefinedCategories(String path) {
+	/**
+	 * This method reads predefined category data from the provided Excel file
+	 * @param path Path to the Excel-file with predefined categories
+	 * @return True if data were read successfully, otherwise false
+	 */
+	public boolean readPredefinedCategories(String path) {
 		boolean Ok = true;
 		Map<String, String> data = new HashMap<>();
 		try(FileInputStream fileIn = new FileInputStream(path);) {
@@ -121,5 +146,6 @@ public class CategoriesSetter implements ICategorizer {
 			this.categories = data;
 			isInitialized = true;
 		}
+		return Ok;
 	}
 }

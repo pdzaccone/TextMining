@@ -10,27 +10,53 @@ import analysis.WordTable;
 import dataUnits.IDataUnitCorpus;
 import dataUnits.IDataUnitDoc;
 import dataUnits.IDataUnitElemental;
-import functions.FunctionIDF;
-import functions.FunctionTF;
+import functions.IFunctionIDF;
+import functions.IFunctionTF;
 import utils.Languages;
 import utils.Pair;
 import utils.PairAnalysisResults;
 
 /**
- * This class prepares data for the normalization with the help of the TF-IDF algorithm - it counts words and calculates their weights
+ * This {@link IAnalyzer} prepares data for the normalization with the help of the TF-IDF algorithm - it counts words and calculates their weights
  * with the help of the provided TF and IDF functions 
  * @author Pdz
  *
  */
 public class TfIdfPreparator implements IElementalAnalyzer, IDocAnalyzer, ICorpusAnalyzer {
 
-	private FunctionTF functionTF;
-	private FunctionIDF functionIDF;
-	private boolean isInitialized;
-	private final boolean shouldOverwrite;
-	private boolean multipleLangsPerDoc;
+	/**
+	 * TF-function used
+	 */
+	private IFunctionTF functionTF;
 	
-	public TfIdfPreparator(boolean overwrite, FunctionTF funcTF, FunctionIDF funcIDF, boolean multiLanguage) {
+	/**
+	 * IDF function used
+	 */
+	private IFunctionIDF functionIDF;
+
+	/**
+	 * Whether the {@link IAnalyzer} has been initialized successfully
+	 */
+	private boolean isInitialized;
+	
+	/**
+	 * Whether this {@link IAnalyzer} should overwrite already existing results from previous analysis if they exist
+	 */
+	private final boolean shouldOverwrite;
+
+	/**
+	 * Whether it is acceptable for a single document to be written in several languages
+	 */
+	private boolean multipleLangsPerDoc;
+
+	/**
+	 * Constructor with parameters
+	 * @param overwrite Whether this {@link IAnalyzer} should overwrite already existing results from previous analysis if they exist
+	 * @param funcTF TF-function
+	 * @param funcIDF IDF-function
+	 * @param multiLanguage Whether it is acceptable for a single document to be written in several languages
+	 */
+	public TfIdfPreparator(boolean overwrite, IFunctionTF funcTF, IFunctionIDF funcIDF, boolean multiLanguage) {
 		this.shouldOverwrite = overwrite;
 		this.functionTF = funcTF;
 		this.functionIDF = funcIDF;
@@ -75,17 +101,13 @@ public class TfIdfPreparator implements IElementalAnalyzer, IDocAnalyzer, ICorpu
 		result.addResult(new Pair<>(weights, shouldOverwrite), IAnalyzer.LOCAL);
 		result.addResult(new Pair<>(table, shouldOverwrite), IAnalyzer.SEND_UP);
 		return result;
-}
+	}
 
 	@Override
 	public PairAnalysisResults feed(IDataUnitElemental input) {
 		PairAnalysisResults result = new PairAnalysisResults();
 		Languages lang = Languages.unknown;
 		if (!input.getAnalysisResults(AnalysisTypes.language).isEmpty()) {
-			if (((MetadataModification)input.getAnalysisResults(AnalysisTypes.language).get(0)).getData().size() > 1) {
-				int zzz = 0;
-				zzz++;
-			}
 			lang = Languages.fromString(((MetadataModification)input.getAnalysisResults(AnalysisTypes.language)
 					.get(0)).getData().last().getData());
 		}

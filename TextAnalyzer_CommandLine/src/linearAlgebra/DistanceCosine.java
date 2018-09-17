@@ -1,5 +1,10 @@
 package linearAlgebra;
 
+/**
+ * This class calculates distance between vectors as a cosine
+ * @author Pdz
+ *
+ */
 public class DistanceCosine implements IDistanceMetrics {
 
 	@Override

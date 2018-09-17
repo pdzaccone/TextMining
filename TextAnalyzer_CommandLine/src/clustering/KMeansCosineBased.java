@@ -6,10 +6,19 @@ import linearAlgebra.DistanceCosine;
 import linearAlgebra.ITermsVector;
 import utils.Pair;
 
+/**
+ * This version of K-Means clustering algorithm uses cosine to calculate distance between vectors
+ * @author Pdz
+ *
+ */
 public class KMeansCosineBased extends KMeansBase {
 
 	private static final double COSINE_THRESHOLD = 1;
-		
+	
+	/**
+	 * Constructor with parameter
+	 * @param keepUnknownCategory Whether to keep the "unknown" category
+	 */
 	public KMeansCosineBased(boolean keepUnknownCategory) {
 		super(keepUnknownCategory);
 	}

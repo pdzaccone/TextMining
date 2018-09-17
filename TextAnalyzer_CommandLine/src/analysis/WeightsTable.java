@@ -18,22 +18,45 @@ import analyzers.AnalysisTypes;
 import dataUnits.IDataUnit;
 import filters.IWeightsFilter;
 import io.IWriterXML;
+import io.XMLException;
 import utils.Languages;
 import utils.WeightedObject;
 
+/**
+ * This class stores all terms weights for the document corpus 
+ * @author Pdz
+ *
+ */
 public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 	
-//	private static final long thresholdSaveXML = 50;
+	/**
+	 * Threshold value, defining whether the {@link WeightsTable} should be saved to the XML-file with the rest of the data.
+	 * Such saving is extremely resource-consuming, so it should be used with caution. 0 symbolizes deactivated save
+	 */
+	private static final long thresholdSaveXML = 0;
+	
+	/**
+	 * Type of {@link IAnalysisResult}
+	 */
 	private static final AnalysisTypes type = AnalysisTypes.weights;
 
+	/**
+	 * String constant, used in string generation / parsing. Separates individual terms
+	 */
 	private static final String separatorTerms = ";";
+
+	/**
+	 * String constant, used in string generation / parsing. Separates terms and their weights
+	 */
 	private static final String separatorParams = "-";
 
 	/**
+	 * Loads {@link WeightsTable} objects from XML file.
+	 * <p>
 	 * At the moment this functionality is not used, because the algorithm cannot distinguish between 
 	 * new and previously generated data. Thus temporarily switched off
-	 * @param reader
-	 * @return
+	 * @param reader Initialized {@link XMLEventReader} object, with its cursor at the beginning of the {@link WeightsTable}
+	 * @return Resulting {@link WeightsTable} or null
 	 */
 	public static IAnalysisResult createFromXML(XMLEventReader reader) {
 		WeightsTable result = null;
@@ -119,18 +142,28 @@ public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 		return result;
 	}
 
-//	private static String convertToString(Map<String, Double> input) {
-//		StringBuilder sb = new StringBuilder();
-//		TreeSet<WeightedObject> tree = new TreeSet<>();
-//		input.entrySet().stream().forEach(val -> tree.add(new WeightedObject(val.getKey(), val.getValue())));
-//		Iterator<WeightedObject> it = tree.descendingIterator();
-//		while (it.hasNext()) {
-//			WeightedObject obj = it.next();
-//			sb.append(String.format("%s %s %.2f%s ", obj.getData(), separatorParams, obj.getWeight(), separatorTerms));
-//		}
-//		return sb.toString();
-//	}
+	/**
+	 * Composes a string to save {@link WeightsTable} to file
+	 * @param input Map with terms and their weights
+	 * @return Resulting string
+	 */
+	private static String convertToString(Map<String, Double> input) {
+		StringBuilder sb = new StringBuilder();
+		TreeSet<WeightedObject> tree = new TreeSet<>();
+		input.entrySet().stream().forEach(val -> tree.add(new WeightedObject(val.getKey(), val.getValue())));
+		Iterator<WeightedObject> it = tree.descendingIterator();
+		while (it.hasNext()) {
+			WeightedObject obj = it.next();
+			sb.append(String.format("%s %s %.2f%s ", obj.getData(), separatorParams, obj.getWeight(), separatorTerms));
+		}
+		return sb.toString();
+	}
 
+	/**
+	 * Parses a string with terms and their weights and creates corresponding map
+	 * @param input Input string
+	 * @return Resulting map with terms and their weights (or an empty map)
+	 */
 	private static Map<String, Double> convertFromString(String input) {
 		Map<String, Double> result = new HashMap<>();
 		boolean Ok = true;
@@ -157,40 +190,32 @@ public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 		return result;
 	}
 
-//	private Supplier<TreeSet<Double>> supplierDouble =
-//		    () -> new TreeSet<Double>();
-//
-//	private Comparator<WeightedObject> comparator =
-//		    Comparator.comparingDouble(WeightedObject::getWeight);
-//	
-//	private Supplier<TreeSet<WeightedObject>> supplierWeightedObject =
-//		    () -> new TreeSet<WeightedObject>(comparator);
-
+	/**
+	 * Internal data map
+	 */
 	private Map<Languages, Map<String, Double>> data;
+	
+	/**
+	 * Whether the {@link IAnalysisResult} is complete for this session
+	 */
 	private boolean markedFinal;
 	
+	/**
+	 * Default constructor
+	 */
 	public WeightsTable() {
 		this.markedFinal = false;
 		this.data = new HashMap<>();
 	}
 	
+	/**
+	 * Copy constructor
+	 * @param input {@link WeightsTable} object to copy
+	 */
 	public WeightsTable(WeightsTable input) {
 		this.markedFinal = input.isFinal();
 		this.data = new HashMap<>(input.data);
 	}
-
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (obj instanceof MetadataModification) {
-//			return this.data.equals(((WeightsTable)obj).data);
-//		}
-//		return false;
-//	}
-//	
-//	@Override
-//    public int hashCode() {
-//		return 31 + (this.data == null ? 0 : this.data.hashCode());
-//    }
 
 	@Override
 	public AnalysisTypes getType() {
@@ -238,25 +263,22 @@ public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 		return result;
 	}
 
-	/**
-	 * Temporarily not in use (see {@link WeightsTable.createFromXML})
-	 */
 	@Override
 	public boolean writeToXML(IWriterXML writer) {
 		boolean Ok = true;
-//		try {
-//			long count = this.data.entrySet().stream().mapToInt(val -> val.getValue().size()).sum();
-//			if (count < thresholdSaveXML) {
-//				for (Languages lang : this.data.keySet()) {
-//					writer.writeStartElement(getType().getTagText());
-//					writer.writeAttribute(XMLTags.language.getTagText(), lang.getTagText());
-//					writer.writeData(convertToString(this.data.get(lang)));
-//					writer.writeEndElement();
-//				}
-//			}
-//		} catch (XMLException e) {
-//			Ok = false;
-//		}
+		try {
+			long count = this.data.entrySet().stream().mapToInt(val -> val.getValue().size()).sum();
+			if (count < thresholdSaveXML) {
+				for (Languages lang : this.data.keySet()) {
+					writer.writeStartElement(getType().getTagText());
+					writer.writeAttribute(XMLTags.language.getTagText(), lang.getTagText());
+					writer.writeData(convertToString(this.data.get(lang)));
+					writer.writeEndElement();
+				}
+			}
+		} catch (XMLException e) {
+			Ok = false;
+		}
 		return Ok;
 	}
 
@@ -296,10 +318,20 @@ public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 //		return this;
 	}
 
+	/**
+	 * Adds new data to the table (of the specified language)
+	 * @param lang Language
+	 * @param resForLang Map of terms and their weights
+	 */
 	private void add(Languages lang, Map<String, Double> resForLang) {
 		this.data.put(lang, resForLang);
 	}
 
+	/**
+	 * Gets all data for a specified language
+	 * @param lang Language
+	 * @return Resulting map with weighted terms or an empty map
+	 */
 	protected Map<String, Double> getDataForLanguage(Languages lang) {
 		if (this.data.containsKey(lang)) {
 			return this.data.get(lang);
@@ -307,6 +339,12 @@ public class WeightsTable implements IAnalysisResult, IWeightedAnalysis {
 		return new HashMap<>();
 	}
 
+	/**
+	 * Adds a single weighted term 
+	 * @param lang Language
+	 * @param term Term
+	 * @param weight Weight
+	 */
 	public void add(Languages lang, String term, double weight) {
 		Map<String, Double> map = null;
 		if (!this.data.containsKey(lang)) {

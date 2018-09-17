@@ -22,17 +22,36 @@ import utils.Pair;
 import utils.PairAnalysisResults;
 
 /**
- * This class prepares a term-to-document matrix for the following clustering algorithms to use
+ * This {@link IAnalyzer} prepares a term-document matrix to be used by clustering algorithms
  * @author Pdz
  *
  */
 public class TDMatrixPreparator implements IDocAnalyzer, ICorpusAnalyzer {
 
+	/**
+	 * Internal storage with all words
+	 */
 	private Map<Languages, List<String>> words;
+	
+	/**
+	 * List with all original documents
+	 */
 	private List<IDataUnitDoc> documents;
-	private final boolean shouldOverwrite;
+	
+	/**
+	 * Whether the {@link IAnalyzer} has been initialized successfully
+	 */
 	private boolean isInitialized;
 	
+	/**
+	 * Whether this {@link IAnalyzer} should overwrite already existing results from previous analysis if they exist
+	 */
+	private final boolean shouldOverwrite;
+
+	/**
+	 * Constructor with parameter
+	 * @param overwrite Whether this {@link IAnalyzer} should overwrite already existing results from previous analysis if they exist
+	 */
 	public TDMatrixPreparator(boolean overwrite) {
 		this.words = new HashMap<>();
 		this.documents = new ArrayList<>();
@@ -84,14 +103,22 @@ public class TDMatrixPreparator implements IDocAnalyzer, ICorpusAnalyzer {
 		return this.isInitialized;
 	}
 
+	/**
+	 * Creates terms vector from the provided input data
+	 * @param id Vector ID
+	 * @param language Language
+	 * @param input Input data to populate resulting vector with
+	 * @return Resulting {@link ITermsVector} object
+	 */
 	private ITermsVector createDataVector(int id, Languages language, Map<String, ? extends Number> input) {
-//		SparseRealVector vector = new OpenMapRealVector(this.words.get(language).size());
-//		for (String term : input.keySet()) {
-//			vector.setEntry(this.words.get(language).indexOf(term), (double) input.get(term));
-//		}
 		return new TermsVectorApacheCommons(id, this.words.get(language), input);
 	}
 
+	/**
+	 * Updates internal vocabulary for a specific language
+	 * @param language Language
+	 * @param newData New terms
+	 */
 	private void initVocabularlyForLanguage(Languages language, Map<String, ? extends Number> newData) {
 		List<String> allWords = words.get(language);
 		if (allWords == null) {

@@ -4,6 +4,11 @@ import analyzers.AnalysisTypes;
 import dataUnits.IDataUnit;
 import io.IWriterXML;
 
+/**
+ * Empty data analysis class
+ * @author Pdz
+ *
+ */
 public class EmptyAnalysis implements IAnalysisResult {
 
 	@Override
@@ -29,24 +34,10 @@ public class EmptyAnalysis implements IAnalysisResult {
 	@Override
 	public void update(IDataUnit obj, boolean shouldOverwrite) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public boolean isEmpty() {
 		return true;
 	}
-	
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (obj instanceof EmptyAnalysis) {
-//			return true;
-//		}
-//		return false;
-//	}
-//	
-//	@Override
-//	public int hashCode() {
-//	    return 31;
-//	}
 }

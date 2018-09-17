@@ -17,12 +17,26 @@ import dataUnits.DocumentBase;
 import dataUnits.IDataUnitCorpus;
 import dataUnits.IDataUnitDoc;
 
+/**
+ * JSON-files Reader
+ * @author Pdz
+ *
+ */
 public class ReaderJSONData implements IReader {
 
+	/**
+	 * It is assumed that each document begins with this tag
+	 */
 	private static final String PREFIX_LINK = "http";
 
+	/**
+	 * Final list of documents
+	 */
 	private List<IReadable> documents;
 	
+	/**
+	 * Constructor without parameters
+	 */
 	public ReaderJSONData() {
 		documents = new ArrayList<IReadable>();
 	}

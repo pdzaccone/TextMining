@@ -1,5 +1,13 @@
 package utils;
 
+/**
+ * This class holds 3 different objects
+ * @author Pdz
+ *
+ * @param <T>
+ * @param <V>
+ * @param <K>
+ */
 public class Tuple<T, V, K> {
 
 	private T dataT;

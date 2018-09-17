@@ -15,10 +15,23 @@ import io.IWriterXML;
 import io.XMLException;
 import utils.ListMap;
 
+/**
+ * Base class for elemental data blocks
+ * @author Pdz
+ *
+ */
 public class DataUnitElementalBase implements IDataUnitElemental {
 
+	/**
+	 * Tag to recognize this specific version of the document
+	 */
 	public static final String typeTag = "elemBase";
 	
+	/**
+	 * Reads elemental data block from an XML-file
+	 * @param reader Initialized XML reader, with cursor at the beginning of the entry
+	 * @return Resulting elemental data block or null
+	 */
 	public static IReadableXML createFromXML(XMLEventReader reader) {
 		boolean Ok = true, goOn = true;
 		DataUnitElementalBase result = null;
@@ -93,32 +106,31 @@ public class DataUnitElementalBase implements IDataUnitElemental {
 		return result;
 	}
 
+	/**
+	 * Tag
+	 */
 	private String key;
+	
+	/**
+	 * Data
+	 */
 	private String data;
+	
+	/**
+	 * Analysis data
+	 */
 	private ListMap<AnalysisTypes, IAnalysisResult> analysis;
 	
+	/**
+	 * Constructor with parameters
+	 * @param key Tag
+	 * @param value Data
+	 */
 	public DataUnitElementalBase(String key, String value) {
 		this.key = key.trim();
 		this.data = value.trim();
 		this.analysis = new ListMap<>();
 	}
-
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (obj instanceof DataUnitElementalBase) {
-//			return this.data.equals(((DataUnitElementalBase)obj).data)
-//					&& this.key.equals(((DataUnitElementalBase)obj).key)
-//					&& this.analysis.equals(((DataUnitElementalBase)obj).analysis);
-//		}
-//		return false;
-//	}
-//	
-//	@Override
-//    public int hashCode() {
-//		return 31 + (this.analysis == null ? 0 : this.analysis.hashCode()) 
-//				+ (this.data == null ? 0 : this.data.hashCode())
-//				+ (this.key == null ? 0 : this.key.hashCode());
-//    }
 
 	@Override
 	public String getKey() {
@@ -139,7 +151,7 @@ public class DataUnitElementalBase implements IDataUnitElemental {
 			if (!this.analysis.isEmpty()) {
 				writer.writeStartElement(XMLTags.analysisData.getTagText());
 				for (AnalysisTypes type : this.analysis.keySet()) {
-					if (type.writingToXMLSupported()) {
+					if (type.canBeWrittenToXML()) {
 						writer.writeStartElement(type.getTagText());
 						for (IAnalysisResult res : this.analysis.get(type)) {
 							if (!res.writeToXML(writer)) {
@@ -192,7 +204,7 @@ public class DataUnitElementalBase implements IDataUnitElemental {
 	
 	@Override
 	public void resetAnalysis(AnalysisTypes type) {
-		this.analysis.removeType(type);
+		this.analysis.removeKey(type);
 	}
 
 	@Override

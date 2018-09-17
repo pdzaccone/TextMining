@@ -16,6 +16,11 @@ import io.ISaveableXML;
 import io.IWriterXML;
 import io.XMLException;
 
+/**
+ * This class is responsible for application configuration
+ * @author Pdz
+ *
+ */
 public class ConfigurationData implements IReadableXML, ISaveableXML {
 
 	public static final String configTag = "config";
@@ -41,10 +46,19 @@ public class ConfigurationData implements IReadableXML, ISaveableXML {
 	private static final String extensionJSON = ".json";
 
 
+	/**
+	 * Gets path to the configuration file
+	 * @return Resulting path
+	 */
 	public static String getConfigPath() {
 		return System.getProperty("user.dir") + System.getProperty("file.separator") + fileConfig;
 	}
 
+	/**
+	 * Reads configuration data from an XML file
+	 * @param reader Initialized XML-reader
+	 * @return Resulting configuration data or null
+	 */
 	public static ConfigurationData createFromXML(XMLEventReader reader) {
 		boolean Ok = true;
 		
@@ -99,10 +113,24 @@ public class ConfigurationData implements IReadableXML, ISaveableXML {
 		return result;
 	}
 	
+	/**
+	 * Path to the categories data
+	 */
 	private String pathCategories;
+	
+	/**
+	 * Path to input data
+	 */
 	private String pathData;
+	
+	/**
+	 * Path to statistics data
+	 */
 	private String pathStatistics;
 	
+	/**
+	 * Constructor without parameters
+	 */
 	public ConfigurationData() {
 		this.pathCategories = System.getProperty("user.dir") + System.getProperty("file.separator") + defaultFolderCategories;
 		this.pathData = System.getProperty("user.dir") + System.getProperty("file.separator") + defaultFolderData;
@@ -143,6 +171,10 @@ public class ConfigurationData implements IReadableXML, ISaveableXML {
 		this.pathData = path;
 	}
 
+	/**
+	 * Generates name for the new document corpus file
+	 * @return Resulting name
+	 */
 	public String generateNameCorpus() {
 		SimpleDateFormat sdf = new SimpleDateFormat(dateTimeString);
 		String timeStr = sdf.format(new Date());
@@ -150,6 +182,10 @@ public class ConfigurationData implements IReadableXML, ISaveableXML {
 		return str;
 	}
 
+	/**
+	 * Generates name for the new categories file
+	 * @return Resulting name
+	 */
 	public String generateNameCategories() {
 		if (!Files.isDirectory(Paths.get(pathCategories))) {
 			return this.pathCategories;
@@ -160,6 +196,10 @@ public class ConfigurationData implements IReadableXML, ISaveableXML {
 		return str;
 	}
 
+	/**
+	 * Generates name for the new file with statistics
+	 * @return Resulting name
+	 */
 	public String generateNameStatistics() {
 		SimpleDateFormat sdf = new SimpleDateFormat(dateTimeString);
 		String timeStr = sdf.format(new Date());
@@ -167,6 +207,10 @@ public class ConfigurationData implements IReadableXML, ISaveableXML {
 		return str;
 	}
 
+	/**
+	 * Checks whether the needed folders exist and creates them otherwise
+	 * @throws IOException
+	 */
 	public void checkAndCreateFolders() throws IOException {
 		if (!Files.exists(Paths.get(pathData))) {
 			if (pathData.endsWith(defaultFolderData)) {

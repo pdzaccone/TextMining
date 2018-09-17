@@ -15,11 +15,26 @@ import linearAlgebra.IDocTermMatrix;
 import utils.Languages;
 import utils.Tuple;
 
+/**
+ * LSA-algorithm
+ * @author Pdz
+ *
+ */
 public class LSAAlgorithm implements IWeightsToDistancesConverter {
 
+	/**
+	 * Matrix filter, used for reducing matrix dimensions
+	 */
 	private IMatrixFilter filter;
+	
+	/**
+	 * Internal data storage
+	 */
 	private WordsMatrix data;
 	
+	/**
+	 * Constructor without parameters
+	 */
 	public LSAAlgorithm() {
 		this.filter = new MatrixFilterNone();
 		this.data = null;
@@ -54,12 +69,6 @@ public class LSAAlgorithm implements IWeightsToDistancesConverter {
 		}
 		return new HashSet<>();
 	}
-
-//	@Override
-//	public IAnalysisResult getData() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	@Override
 	public WordsMatrix getData() {

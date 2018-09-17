@@ -1,5 +1,10 @@
 package linearAlgebra;
 
+/**
+ * This class calculates Euclidean distance between vectors
+ * @author Pdz
+ *
+ */
 public class DistanceEuclidean implements IDistanceMetrics {
 
 	@Override

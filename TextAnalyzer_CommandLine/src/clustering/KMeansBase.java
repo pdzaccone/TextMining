@@ -22,19 +22,57 @@ import utils.ListMap;
 import utils.Pair;
 import utils.WeightedMap;
 
+/**
+ * Base implementation of K-Means clustering algorithm
+ * @author Pdz
+ *
+ */
 public class KMeansBase implements IClusterer, IMultilingual {
 
+	/**
+	 * String constant for identification of a temporary "unknown" cluster
+	 */
 	protected static final String CATEGORY_UNKNOWN = "CU";
+
+	/**
+	 * String constant used for naming a new cluster
+	 */
 	private static final String PREFIX_CATEGORY = "categoryNew";
+	
+	/**
+	 * This empirical coefficient more or less defines size of clusters
+	 */
 	private static final double THRESHOLD = 0.01;
 	
+	/**
+	 * Whether to keep the "unknown" category
+	 */
 	protected boolean keepUnknown;
+	
+	/**
+	 * This function defines how the distance between two vectors is calculated
+	 */
 	protected IDistanceMetrics distMetrics;
 	
+	/**
+	 * Internal storage with new categories
+	 */
 	protected ListMap<Languages, String> categoriesNew;
+	
+	/**
+	 * All clusters 
+	 */
 	private Map<Languages, Map<String, ICluster>> clusters;
+	
+	/**
+	 * Clustering results (weighted terms for each document)
+	 */
 	private Map<Integer, WeightedMap> clusteringResults;
 	
+	/**
+	 * Constructor with parameter
+	 * @param keepUnknownCategory Whether to keep the "unknown" category
+	 */
 	public KMeansBase(boolean keepUnknownCategory) {
 		this.keepUnknown = keepUnknownCategory;
 		this.categoriesNew = new ListMap<>();
@@ -43,6 +81,9 @@ public class KMeansBase implements IClusterer, IMultilingual {
 		this.initSpecifics();
 	}
 	
+	/**
+	 * This method defines how algorithm calculates distances
+	 */
 	protected void initSpecifics() {
 		this.distMetrics = new DistanceEuclidean();
 	}
@@ -77,6 +118,12 @@ public class KMeansBase implements IClusterer, IMultilingual {
 		categoriesNew.removeDuplicates();
 	}
 
+	/**
+	 * Imports already existing categories by creating empty clusters, defining their centers, etc.
+	 * @param lang Language
+	 * @param inCategories Categories to import
+	 * @return Resulting cluster map
+	 */
 	private Map<String, ICluster> importExistingCategories(Languages lang, Map<String, ICategory> inCategories) {
 		Map<String, ICluster> results = new HashMap<>();
 		for (ICategory cat : inCategories.values()) {
@@ -122,6 +169,9 @@ public class KMeansBase implements IClusterer, IMultilingual {
 		updateCategories();
 	}
 
+	/**
+	 * Removes the "unknown" category and its cluster from internal data storages
+	 */
 	private void updateCategories() {
 		if (!keepUnknown) {
 			for (Languages lang : this.categoriesNew.keySet()) {
@@ -130,6 +180,12 @@ public class KMeansBase implements IClusterer, IMultilingual {
 		}
 	}
 
+	/**
+	 * Calculates new centroids (clusters)
+	 * @param input Existing clusters
+	 * @return Set of central vectors, defining new clusters
+	 * @throws Exception
+	 */
 	private Map<String, ITermsVector> calculateNewCentroids(Map<String, ICluster> input) throws Exception {
 		Map<String, ITermsVector> vectors = new HashMap<>();
 		for (String cat : input.keySet()) {
@@ -142,6 +198,13 @@ public class KMeansBase implements IClusterer, IMultilingual {
 		return vectors;
 	}
 
+	/**
+	 * Distributes vectors between clusters
+	 * @param input Vectors
+	 * @param lang Language
+	 * @return Updated cluster set
+	 * @throws Exception
+	 */
 	protected Map<String, ICluster> reassignVectorsAmongClusters(Map<String, ICluster> input, Languages lang) throws Exception {
 		Map<String, ICluster> results = new HashMap<>();
 		Map<String, ICluster> newClusters = new HashMap<>();
@@ -180,6 +243,13 @@ public class KMeansBase implements IClusterer, IMultilingual {
 		return results;
 	}
 
+	/**
+	 * Finds new / existing cluster for the given terms vector
+	 * @param input Set with all clusters
+	 * @param vector Vector to "sort"
+	 * @return Resulting pair of cluster / distance, cluster name = "" -> new cluster should be created
+	 * @throws Exception
+	 */
 	protected Pair<String, Double> findNewCluster(Map<String, ICluster> input, ITermsVector vector) throws Exception {
 		Pair<String, Double> result = new Pair<String, Double>("", Double.MAX_VALUE);
 		for (String catInner : input.keySet()) {
@@ -194,11 +264,21 @@ public class KMeansBase implements IClusterer, IMultilingual {
 		return result;
 	}
 
+	/**
+	 * Generates new category (cluster)
+	 * @param lang Language
+	 * @return Category name
+	 */
 	protected String generateNewCategory(Languages lang) {
 		int maxExistingSuffix = searchForMaxCategory(PREFIX_CATEGORY);
 		return PREFIX_CATEGORY + (maxExistingSuffix + 1);
 	}
 
+	/**
+	 * Helper method for generation of new category name
+	 * @param prefix Prefix to use
+	 * @return Resulting category index number
+	 */
 	private int searchForMaxCategory(String prefix) {
 		OptionalInt maxSuffix = this.categoriesNew.values().stream()
 				.flatMap(val -> val.stream()).filter(val -> val.startsWith(prefix)).mapToInt(val -> {
@@ -214,10 +294,17 @@ public class KMeansBase implements IClusterer, IMultilingual {
 		return maxSuffix.isPresent() ? maxSuffix.getAsInt() : -1;
 	}
 	
+	/**
+	 * Calculates error as squared difference between cluster centers
+	 * @param oldData Old cluster centers
+	 * @param newData New cluster centers
+	 * @return Resulting pair new clusters have been added / removed - error. 1st value is true - no changes in clusters themselves
+	 * @throws Exception
+	 */
 	private Pair<Boolean, Double> calculateDifference(Map<String, ITermsVector> oldData, Map<String, ITermsVector> newData) throws Exception {
 		Pair<Boolean, Double> error = new Pair<>(true, (double) 0);
 		if (!oldData.keySet().containsAll(newData.keySet()) || !newData.keySet().containsAll(oldData.keySet())) {
-			error.update(false,  Double.MAX_VALUE);
+			error.update(false, Double.MAX_VALUE);
 		} else {
 			for (String category : oldData.keySet()) {
 				error.update(error.getFirst(), error.getSecond() + 
@@ -235,8 +322,7 @@ public class KMeansBase implements IClusterer, IMultilingual {
 				return anRes;
 			}
 		} catch (Exception e) {
-			int zzz = 0;
-			zzz++;
+			// TODO: handle exception
 		}
 		return null;
 	}

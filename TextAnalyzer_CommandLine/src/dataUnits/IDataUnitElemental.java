@@ -9,10 +9,18 @@ import javax.xml.stream.events.XMLEvent;
 
 import io.IReadableXML;
 
+/**
+ * Base interface for the elemental data block
+ * @author Pdz
+ *
+ */
 public interface IDataUnitElemental extends IDataUnit {
-	public String getKey();
-	public String getValue();
 	
+	/**
+	 * Reads elemental data block from an XML-file
+	 * @param reader Initialized XML-reader, with cursor set at the beginning of the data block
+	 * @return Resulting elemental data block or null
+	 */
 	public static IReadableXML createFromXML(XMLEventReader reader) {
 		boolean Ok = true, goOn = true;
 
@@ -61,4 +69,16 @@ public interface IDataUnitElemental extends IDataUnit {
 		}
 		return result;
 	}
+
+	/**
+	 * Gets tag, identifying this block within the document
+	 * @return Tag value
+	 */
+	public String getKey();
+	
+	/**
+	 * Gets contents of the data block 
+	 * @return Contents
+	 */
+	public String getValue();	
 }

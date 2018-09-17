@@ -15,13 +15,16 @@ import utils.WeightedMap;
 import utils.WeightedObject;
 
 /**
- * This analyzer class defines the language of the document.
+ * This {@link IAnalyzer} identifies the language of the document
  * 
  * @author Pdz
  *
  */
 public class LanguageAnalyzer extends LanguageAnalyzerDefault {
 	
+	/**
+	 * This coefficient helps to choose a more important language 
+	 */
 	private static final double LANGUAGE_RECOGNITION_PRECISION = 0.8;
 	
 	public LanguageAnalyzer(boolean overwrite) {
@@ -36,10 +39,6 @@ public class LanguageAnalyzer extends LanguageAnalyzerDefault {
 		if (!input.getValue().isEmpty()) {
 			WeightedMap counter = new WeightedMap();
 			for (Languages lang : Languages.values()) {
-				if (input.getValue().contains("Unternehmenskultur") || input.getValue().contains("unternehmenskultur")) {
-					int zzz = 0;
-					zzz++;
-				}
 				long count = RegexHelper.split(RegexHelper.patternWords, input.getValue())
 						.stream().filter(str -> lang.containsKeyword(str)).count();
 				if (count != 0) {

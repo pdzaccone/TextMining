@@ -1,15 +1,35 @@
 package utils;
 
+/**
+ * Helper class, holding an object and its weight
+ * @author Pdz
+ *
+ */
 public class WeightedObject implements Comparable<WeightedObject> {
 
+	/**
+	 * String data
+	 */
 	private String data;
+	
+	/**
+	 * Its weight
+	 */
 	private double weight;
 	
+	/**
+	 * Constructor with parameters
+	 * @param data Data
+	 * @param weight Weight
+	 */
 	public WeightedObject(String data, double weight) {
 		this.data = data;
 		this.weight = weight;
 	}
 
+	/**
+	 * Default constructor
+	 */
 	public WeightedObject() {
 		this.data = null;
 		this.weight = 0;

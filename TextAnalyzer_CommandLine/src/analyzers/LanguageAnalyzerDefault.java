@@ -10,16 +10,27 @@ import utils.PairAnalysisResults;
 import utils.WeightedObject;
 
 /**
- * This analyzer class defines the language of the document.
+ * This {@link IAnalyzer} identifies the language of both elemental and standard document
  * 
  * @author Pdz
  *
  */
 public class LanguageAnalyzerDefault implements IElementalAnalyzer, IDocAnalyzer {
 	
-	protected boolean shouldOverwrite;
+	/**
+	 * Whether the {@link IAnalyzer} has been initialized successfully
+	 */
 	protected boolean isInitialized;
 	
+	/**
+	 * Whether this {@link IAnalyzer} should overwrite already existing results from previous analysis if they exist
+	 */
+	protected final boolean shouldOverwrite;
+	
+	/**
+	 * Constructor with parameter
+	 * @param overwrite Whether this {@link IAnalyzer} should overwrite already existing results from previous analysis if they exist
+	 */
 	public LanguageAnalyzerDefault(boolean overwrite) {
 		this.shouldOverwrite = overwrite;
 		this.isInitialized = false;

@@ -16,10 +16,21 @@ import analysis.ICategory;
 import dataUnits.IDataUnitCorpus;
 import utils.ConfigurationData;
 
+/**
+ * XML-files reader
+ * @author Pdz
+ *
+ */
 public class ReaderXML implements IReader {
 
+	/**
+	 * All read data
+	 */
 	private List<IReadable> data;
 	
+	/**
+	 * Constructor without parameters
+	 */
 	public ReaderXML() {
 		data = new ArrayList<>();
 	}
@@ -35,7 +46,6 @@ public class ReaderXML implements IReader {
 		XMLInputFactory factory;
 		XMLEventReader reader = null;
 				 
-//		try (FileReader fReader = new FileReader(filename)) {
 		try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(filename))) {
 			factory = XMLInputFactory.newInstance();
 			reader = factory.createXMLEventReader(bis, StandardCharsets.UTF_8.name());
@@ -100,7 +110,8 @@ public class ReaderXML implements IReader {
 		return Ok;
 	}
 
+	@Override
 	public List<IReadable> getData() {
 		return data;
-	}	
+	}
 }

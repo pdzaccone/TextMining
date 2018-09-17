@@ -9,7 +9,16 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Workbook;
 
+/**
+ * This enumeration holds various styles for Excel-files
+ * @author Pdz
+ *
+ */
 public enum ExcelStyles {
+	
+	/**
+	 * This style is used for the main title
+	 */
 	mainTitle {
 		@Override
 		public CellStyle createStyle(Workbook wb) {
@@ -24,6 +33,10 @@ public enum ExcelStyles {
 	        return style;
 		}
 	},
+	
+	/**
+	 * This style is used for the secondary title
+	 */
 	secondaryTitle {
 		@Override
 		public CellStyle createStyle(Workbook wb) {
@@ -39,9 +52,21 @@ public enum ExcelStyles {
 		}
 	};
 	
+	/**
+	 * Map with all styles currently in use. This map is cleared after the data have been saved
+	 */
 	private static Map<ExcelStyles, CellStyle> styles = new HashMap<>(); 
 	
+	/**
+	 * Creates style based on a provided {@link Workbook}
+	 * @param wb Workbook
+	 * @return Resulting cell style object
+	 */
 	abstract public CellStyle createStyle(Workbook wb);
+	
+	/**
+	 * Clears the internal storage with styles
+	 */
 	public static void resetStyles() {
 		styles.clear();
 	}

@@ -10,17 +10,37 @@ import utils.Pair;
 import utils.PairAnalysisResults;
 
 /**
- * This class finalizes the words weights normalization by updating data for all documents
+ * This {@link IAnalyzer} finalizes the words weights normalization by updating data for all documents
  * @author Pdz
  *
  */
 public class TfIdfCalculator implements IDocAnalyzer {
 
+	/**
+	 * Weights data for the corpus as a whole
+	 */
 	private IWeightedAnalysis corpusData;
-	private IWeightsFilter filter;
-	private boolean isInitialized;
-	private final boolean shouldOverwrite;
 	
+	/**
+	 * Filter to use with weights data
+	 */
+	private IWeightsFilter filter;
+	
+	/**
+	 * Whether the {@link IAnalyzer} has been initialized successfully
+	 */
+	private boolean isInitialized;
+	
+	/**
+	 * Whether this {@link IAnalyzer} should overwrite already existing results from previous analysis if they exist
+	 */
+	private final boolean shouldOverwrite;
+
+	/**
+	 * Constructor with parameters
+	 * @param overwrite Whether this {@link IAnalyzer} should overwrite already existing results from previous analysis if they exist
+	 * @param filter Filter to use for weights data
+	 */
 	public TfIdfCalculator(boolean overwrite, IWeightsFilter filter) {
 		this.corpusData = new WeightsTable();
 		this.filter = filter;

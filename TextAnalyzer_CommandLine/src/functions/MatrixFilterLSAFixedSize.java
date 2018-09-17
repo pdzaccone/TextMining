@@ -5,8 +5,16 @@ import java.util.List;
 
 import linearAlgebra.IDocTermMatrix;
 
+/**
+ * Reduces matrix dimensions based on a provided fixed size
+ * @author Pdz
+ *
+ */
 public class MatrixFilterLSAFixedSize implements IMatrixFilter {
 
+	/**
+	 * Maximum allowed number of terms in a matrix
+	 */
 	private final int maxNum;
 	
 	public MatrixFilterLSAFixedSize(int maxNumberOfTerms) {

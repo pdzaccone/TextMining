@@ -16,12 +16,34 @@ import io.XMLException;
 import utils.RegexHelper;
 import utils.WeightedObject;
 
+/**
+ * One of variety of {@link IAnalysisResult} classes, storing its data in a single XML-entry
+ * @author Pdz
+ *
+ */
 public class MetadataModification implements IAnalysisResult {
 
+	/**
+	 * Separates keys and values
+	 */
 	private static final String separatorKeyValue = " - ";
+	
+	/**
+	 * Marks weights percentage
+	 */
 	private static final String separatorPercent = "%";
+	
+	/**
+	 * Separates multiple key-value pairs
+	 */
 	private static final String separatorObject = "; ";
 
+	/**
+	 * This method reads {@link MetadataModification} data from the file using the provided {@link XMLEventReader}
+	 * @param reader XML-reader, with its "cursor" positioned at the beginning of this object
+	 * @param type Analysis type, used to better identify the analysis data being read
+	 * @return Resulting {@link IAnalysisResult} object or null
+	 */
 	public static IAnalysisResult createFromXML(XMLEventReader reader, AnalysisTypes type) {
 		MetadataModification result = null;
 		boolean Ok = true, goOn = true;
@@ -55,6 +77,11 @@ public class MetadataModification implements IAnalysisResult {
 		return result;
 	}
 	
+	/**
+	 * Creates a description string from a provided sorted set of weighted data
+	 * @param input Weighted data to "print"
+	 * @return Resulting string description
+	 */
 	private static String convertToString(TreeSet<WeightedObject> input) {
 		StringBuilder sb = new StringBuilder();
 		if (input.size() == 1) {
@@ -68,6 +95,11 @@ public class MetadataModification implements IAnalysisResult {
 		return sb.toString();
 	}
 	
+	/**
+	 * Creates a sorted set of weighted data from the provided textual description
+	 * @param input Input string to parse
+	 * @return Resulting set of weighted objects
+	 */
 	private static TreeSet<WeightedObject> convertFromString(String input) {
 		TreeSet<WeightedObject> result = new TreeSet<>();
 		boolean Ok = true;
@@ -97,16 +129,35 @@ public class MetadataModification implements IAnalysisResult {
 		return result;
 	}
 
+	/**
+	 * Sorted set with weighted data objects
+	 */
 	private TreeSet<WeightedObject> data;
+	
+	/**
+	 * Type of {@link IAnalysisResult} object
+	 */
 	private AnalysisTypes type;
+	
+	/**
+	 * Whether the {@link IAnalysisResult} is final, i.e. "complete" for this session
+	 */
 	private boolean markedFinal;
 
+	/**
+	 * Default constructor
+	 */
 	public MetadataModification() {
 		this.type = AnalysisTypes.none;
 		this.data = new TreeSet<>();
 		this.markedFinal = false;
 	}
 
+	/**
+	 * Constructor with parameters
+	 * @param type Type of analysis result
+	 * @param value Weighted data
+	 */
 	public MetadataModification(AnalysisTypes type, WeightedObject value) {
 		this.type = type;
 		this.data = new TreeSet<>();
@@ -114,6 +165,11 @@ public class MetadataModification implements IAnalysisResult {
 		this.markedFinal = false;
 	}
 
+	/**
+	 * Constructor with parameters
+	 * @param type Type of analysis result
+	 * @param value Sorted set with weighted data
+	 */
 	public MetadataModification(AnalysisTypes type, TreeSet<WeightedObject> value) {
 		this.type = type;
 		this.data = new TreeSet<>();
@@ -121,6 +177,10 @@ public class MetadataModification implements IAnalysisResult {
 		this.markedFinal = false;
 	}
 
+	/**
+	 * Gets internal data as sorted set
+	 * @return Internal data set
+	 */
 	public TreeSet<WeightedObject> getData() {
 		return this.data;
 	}

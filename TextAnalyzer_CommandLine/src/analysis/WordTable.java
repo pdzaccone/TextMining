@@ -19,8 +19,8 @@ import javax.xml.stream.events.XMLEvent;
 
 import analyzers.AnalysisTypes;
 import dataUnits.IDataUnit;
-import functions.FunctionIDF;
-import functions.FunctionTF;
+import functions.IFunctionIDF;
+import functions.IFunctionTF;
 import io.IWriterXML;
 import io.XMLException;
 import utils.Languages;
@@ -28,15 +28,36 @@ import utils.RegexHelper;
 import utils.WeightedMap;
 import utils.WeightedObject;
 
+/**
+ * This class is used during the TF-IDF calculation process
+ * @author Pdz
+ *
+ */
 public class WordTable implements IAnalysisResult, IMultilingual {
 
+	/**
+	 * This is a hard-coded list with "bad" words - terms that should be removed from the analysis at the very beginning
+	 */
 	private static final List<String> listBadWords = new ArrayList<>();
 	
+	/**
+	 * Type of the {@link IAnalysisResult}
+	 */
 	private static final AnalysisTypes type = AnalysisTypes.wordTable;
 
+	/**
+	 * String constant for separating individual terms
+	 */
 	private static final String separatorTerms = ";";
+	
+	/**
+	 * String constant for separating terms and their weights
+	 */
 	private static final String separatorParams = "-";
 
+	/**
+	 * Threshold parameter, controlling whether this {@link IAnalysisResult} should be saved to the XML file or not
+	 */
 	private static final long thresholdSaveXML = 0;
 
 	static {	
@@ -51,10 +72,11 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 	}
 	
 	/**
-	 * At the moment this functionality is not used, because the algorithm cannot distinguish between 
-	 * new and previously generated data. Thus temporarily switched off
-	 * @param reader
-	 * @return
+	 * This method saved {@link WordTable} to the XML file
+	 * <p>
+	 * At the moment this functionality is not used
+	 * @param reader Initialized XML-reader
+	 * @return Resulting {@link IAnalysisResult} or null
 	 */
 	public static IAnalysisResult createFromXML(XMLEventReader reader) {
 		WordTable result = null;
@@ -124,6 +146,11 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 		return result;
 	}
 
+	/**
+	 * Converts provided {@link WeightsMap} object to string (to later save it to XML file)
+	 * @param input {@link WeightedMap} to convert
+	 * @return Resulting string
+	 */
 	private static String convertToString(WeightedMap input) {
 		StringBuilder sb = new StringBuilder();
 		TreeSet<WeightedObject> tree = new TreeSet<>();
@@ -138,6 +165,11 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 		return sb.toString();
 	}
 
+	/**
+	 * Parses provided string to create a {@link WeightedMap} object
+	 * @param input String to parse
+	 * @return Resulting object or null
+	 */
 	private static WeightedMap convertFromString(String input) {
 		WeightedMap result = new WeightedMap();
 		boolean Ok = true;
@@ -164,31 +196,32 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 		return result;
 	}
 	
+	/**
+	 * Internal data
+	 */
 	private Map<Languages, WeightedMap> data;
+
+	/**
+	 * Whether this {@link IAnalysisResult} is complete for this session
+	 */
 	private boolean markedFinal;
 	
+	/**
+	 * Constructor
+	 */
 	public WordTable() {
 		this.data = new HashMap<>();
 		this.markedFinal = false;
 	}
 	
+	/**
+	 * Copy constructor
+	 * @param table A {@link WordTable} object to copy
+	 */
 	public WordTable(WordTable table) {
 		this.data = new HashMap<>(table.data);
 		this.markedFinal = table.isFinal();
 	}
-
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (obj instanceof WordTable) {
-//			return this.data.equals(((WordTable)obj).data);
-//		}
-//		return false;
-//	}
-//	
-//	@Override
-//    public int hashCode() {
-//		return 31 + (this.data == null ? 0 : this.data.hashCode());
-//    }
 	
 	@Override
 	public AnalysisTypes getType() {
@@ -209,14 +242,24 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 		}
 	}
 	
+	/**
+	 * Gets data for a specified language
+	 * @param language Language
+	 * @return Resulting weighted map (or an empty one)
+	 */
 	protected WeightedMap getData(Languages language) {
 		if (this.data.containsKey(language)) {
 			return this.data.get(language);
 		}
 		return new WeightedMap();
 	}
-	
-	public WeightsTable calculateTF(FunctionTF func) {
+
+	/**
+	 * Uses gathered data to calculate TF, using the provided {@link IFunctionTF} function
+	 * @param func Function to calculate TF
+	 * @return Resulting {@link WeightsTable}
+	 */
+	public WeightsTable calculateTF(IFunctionTF func) {
 		WeightsTable result = new WeightsTable();
 		for (Languages lang : this.data.keySet()) {
 			for (String key : getData(lang).keySet()) {
@@ -226,7 +269,13 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 		return result;
 	}
 	
-	public WeightsTable calculateIDF(FunctionIDF func, List<WordTable> input) {
+	/**
+	 * Uses gathered data to calculate IDF, using the provided {@link IFunctionTF} function
+	 * @param func Function to calculate IDF
+	 * @param input List of {@link WordTable} objects for all documents in a document corpus
+	 * @return Resulting {@link WeightsTable}
+	 */
+	public WeightsTable calculateIDF(IFunctionIDF func, List<WordTable> input) {
 		WeightsTable result = new WeightsTable();
 		for (Languages lang : this.data.keySet()) {
 			List<WeightedMap> filteredInput = input.stream().map(val -> val.getData(lang))
@@ -238,6 +287,11 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 		return result;
 	}
 
+	/**
+	 * Adds string of terms to the {@link WordTable} object as it is stored in original data
+	 * @param lang Language
+	 * @param terms String of terms, separated by {@link RegexHelper#patternWords}
+	 */
 	public void addRaw(Languages lang, String terms) {
 		for (String s : RegexHelper.split(RegexHelper.patternWords, terms)) {
 			if (s.isEmpty() || s.length() == 1) {
@@ -249,6 +303,11 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 		}
 	}
 
+	/**
+	 * Adds individual term to the internal storage
+	 * @param lang Language
+	 * @param term Term
+	 */
 	public void add(Languages lang, String term) {
 		WeightedMap newMap = null;
 		if (!this.data.containsKey(lang)) {
@@ -260,6 +319,10 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 		this.data.put(lang, newMap);
 	}
 
+	/**
+	 * Adds data to the current {@link WordTable}
+	 * @param input Data being added
+	 */
 	public void add(WordTable input) {
 		for (Languages lang : Languages.values()) {
 			WeightedMap dataForLanguage = input.getData(lang);
@@ -274,8 +337,10 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 		}
 	}
 	
-	/* 
-	 * Replaces existing values with new ones
+	/**
+	 * Adds new terms to the internal data, replaces existing weights with the new ones
+	 * @param lang Language
+	 * @param input Map with weighted terms
 	 */
 	private void add(Languages lang, WeightedMap input) {
 		if (input != null) {
@@ -284,7 +349,7 @@ public class WordTable implements IAnalysisResult, IMultilingual {
 	}
 
 	/**
-	 * Temporarily not in use (see {@link WordTable.createFromXML})
+	 * Temporarily not in use (see {@link WordTable#createFromXML})
 	 */
 	@Override
 	public boolean writeToXML(IWriterXML writer) {

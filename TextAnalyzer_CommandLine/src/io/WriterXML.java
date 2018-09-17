@@ -14,26 +14,46 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+/**
+ * XML-Writer
+ * @author Pdz
+ *
+ */
 public class WriterXML implements IWriterXML {
 
+	/**
+	 * This internal enumeration identifies XML-elements being written
+	 * @author Pdz
+	 *
+	 */
 	private static enum ElementTypes {
+		/**
+		 * Start element
+		 */
 		start,
+		
+		/**
+		 * Data block
+		 */
 		data,
+		
+		/**
+		 * End element
+		 */
 		end
 	}
 	
+	/**
+	 * Indent used to make resulting XML files more readable
+	 */
 	private static final String indent = "    ";
 
-	private int currentDepth;
-	private XMLStreamWriter writer;
-	private ElementTypes previousElement;
-	
-	public WriterXML() {
-		currentDepth = 0;
-		writer = null;
-		previousElement = ElementTypes.start;
-	}
-	
+	/**
+	 * Adds indent to the XML-file
+	 * @param writer XML-writer
+	 * @param depth Current depth, defines the number of indents
+	 * @throws XMLStreamException
+	 */
 	private static void writeIndent(XMLStreamWriter writer, int depth) throws XMLStreamException
 	{
 		writer.writeCharacters(System.getProperty("line.separator"));
@@ -41,6 +61,30 @@ public class WriterXML implements IWriterXML {
 			writer.writeCharacters(indent);
 	}
 
+	/**
+	 * Defines current depth of nesting and correspondingly the number of indents that should be applied
+	 */
+	private int currentDepth;
+	
+	/**
+	 * Internal XML-writer object
+	 */
+	private XMLStreamWriter writer;
+	
+	/**
+	 * Type of the previous XML-element
+	 */
+	private ElementTypes previousElement;
+	
+	/**
+	 * Constructor without parameters
+	 */
+	public WriterXML() {
+		currentDepth = 0;
+		writer = null;
+		previousElement = ElementTypes.start;
+	}
+	
 	@Override
 	public boolean writeToFile(String filename, ISaveableXML data, boolean deleteIfExists) {
 		boolean Ok = true;

@@ -174,7 +174,7 @@ public class CorpusImpl implements IDataUnitCorpus {
 			if (!this.analysis.isEmpty()) {
 				writer.writeStartElement(XMLTags.analysisData.getTagText());
 				for (AnalysisTypes type : this.analysis.keySet()) {
-					if (type.writingToXMLSupported()) {
+					if (type.canBeWrittenToXML()) {
 						writer.writeStartElement(type.getTagText());
 						for (IAnalysisResult res : this.analysis.get(type)) {
 							if (!res.writeToXML(writer)) {
@@ -251,7 +251,7 @@ public class CorpusImpl implements IDataUnitCorpus {
 
 	@Override
 	public void resetAnalysis(AnalysisTypes type) {
-		this.analysis.removeType(type);
+		this.analysis.removeKey(type);
 	}
 
 	@Override

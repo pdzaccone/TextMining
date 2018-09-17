@@ -8,13 +8,38 @@ import linearAlgebra.IDistanceMetrics;
 import linearAlgebra.ITermsVector;
 import linearAlgebra.TermsVectorApacheCommons;
 
+/**
+ * Base implementation of a {@link ICluster} 
+ * @author Pdz
+ *
+ */
 public class ClusterBase implements ICluster {
-		
+	
+	/**
+	 * Cluster category
+	 */
 	private final String category;
+	
+	/**
+	 * Vectors inside cluster 
+	 */
 	private List<ITermsVector> vectors;
+	
+	/**
+	 * Central cluster vector
+	 */
 	private ITermsVector center;
+	
+	/**
+	 * Function for calculating distance between cluster and other vectors
+	 */
 	private IDistanceMetrics distanceCalculator;
 	
+	/**
+	 * Constructor with parameters
+	 * @param distMetric Function for calculating distance between cluster and other vectors
+	 * @param category Cluster category
+	 */
 	public ClusterBase(IDistanceMetrics distMetric, String category) {
 		this.vectors = new ArrayList<>();
 		this.center = null;
@@ -51,12 +76,7 @@ public class ClusterBase implements ICluster {
 		if (!vectors.isEmpty()) {
 			this.center = new TermsVectorApacheCommons(vectors.get(0).size());
 			for (ITermsVector vector : this.vectors) {
-				try {
-					center = center.add(vector);
-				} catch (Exception e) {
-					int zzz = 0;
-					zzz++;
-				}
+				center = center.add(vector);
 			}
 			center = center.divide(this.vectors.size());
 		}
@@ -82,6 +102,9 @@ public class ClusterBase implements ICluster {
 		return this.distanceCalculator.calculateDistance(this.center, vector);
 	}
 
+	/**
+	 * Currently simply returns 1 if vector belongs to cluster and zero otherwise 
+	 */
 	@Override
 	public double getVectorWeight(ITermsVector vector) {
 		if (this.vectors.contains(vector)) {

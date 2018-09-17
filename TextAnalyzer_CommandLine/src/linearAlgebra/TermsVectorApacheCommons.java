@@ -6,21 +6,48 @@ import java.util.Map;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealVector;
 
+/**
+ * Implementation of the terms vector with Apache Commons library 
+ * @author Pdz
+ *
+ */
 public class TermsVectorApacheCommons implements ITermsVector {
 
+	/**
+	 * Vector ID
+	 */
 	private final int ID;
+	
+	/**
+	 * Vector data
+	 */
 	private RealVector data;
 	
+	/**
+	 * Private constructor with parameters
+	 * @param id ID
+	 * @param vector Input vector
+	 */
 	private TermsVectorApacheCommons(int id, RealVector vector) {
 		this.ID = id;
 		this.data = vector;
 	}
 	
+	/**
+	 * Constructor with parameters, initializes zero vector of specified size 
+	 * @param size Vector size
+	 */
 	public TermsVectorApacheCommons(int size) {
 		this.ID = DEFAULT_ID;
 		this.data = new ArrayRealVector(size);
 	}
 
+	/**
+	 * Constructor with parameters
+	 * @param id ID
+	 * @param wordList All terms
+	 * @param wordVals Terms' weights
+	 */
 	public TermsVectorApacheCommons(int id, List<String> wordList, Map<String, ? extends Number> wordVals) {
 		this.ID = id;
 		this.data = new ArrayRealVector(wordList.size());
@@ -31,11 +58,20 @@ public class TermsVectorApacheCommons implements ITermsVector {
 		}
 	}
 
+	/**
+	 * Constructor with parameters
+	 * @param id ID
+	 * @param input Weights as an array of doubles
+	 */
 	public TermsVectorApacheCommons(int id, double[] input) {
 		this.ID = id;
 		this.data = new ArrayRealVector(input);
 	}
 
+	/**
+	 * Gets underlying {@link RealVector}
+	 * @return Internal vector data
+	 */
 	public RealVector getVectorData() {
 		return data;
 	}

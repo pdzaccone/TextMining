@@ -11,8 +11,18 @@ import javax.xml.stream.events.XMLEvent;
 import crawlers.ICrawler;
 import io.IReadableXML;
 
+/**
+ * Interface with main methods for the document corpus 
+ * @author Pdz
+ *
+ */
 public interface IDataUnitCorpus extends IDataUnit {
 	
+	/**
+	 * Loads document corpus from the XML file
+	 * @param reader Initialized XML-reader with cursor at the beginning of the document corpus
+	 * @return Resulting document corpus or null
+	 */
 	public static IReadableXML createFromXML(XMLEventReader reader) {
 		boolean Ok = true, goOn = true;
 
@@ -62,9 +72,34 @@ public interface IDataUnitCorpus extends IDataUnit {
 		return result;
 	}
 	
+	/**
+	 * Adds new document to the document corpus
+	 * @param input Document to add
+	 */
 	public void addDocument(IDataUnitDoc input);
-	public void addCorpus(IDataUnitCorpus obj);	
+	
+	/**
+	 * Adds data from the provided document corpus to the current one
+	 * @param obj Document corpus to insert
+	 */
+	public void addCorpus(IDataUnitCorpus obj);
+	
+	/**
+	 * Gets a list of all documents
+	 * @return List with all {@link IDataUnitDoc} objects
+	 */
 	public Collection<IDataUnitDoc> getDocuments();
+	
+	/**
+	 * Starts data analysis by applying a crawler to the document corpus
+	 * @param converter Crawler object to use
+	 * @return Resulting (analyzed) document corpus
+	 */
 	public IDataUnitCorpus applyCrawler(ICrawler converter);
+	
+	/**
+	 * Gets number of documents in a document corpus
+	 * @return Number of documents
+	 */
 	public int size();
 }

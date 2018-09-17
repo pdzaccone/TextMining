@@ -19,12 +19,31 @@ import utils.Pair;
 import utils.PairAnalysisResults;
 import utils.PairDataUnitAnalysis;
 
+/**
+ * Base {@link ICrawler} class
+ * @author Pdz
+ *
+ */
 public class CrawlerBase implements ICrawler {
 
+	/**
+	 * Array with all analyzers
+	 */
 	private ListMap<Integer, IAnalyzer> analyzers;
+	
+	/**
+	 * Document corpus
+	 */
 	private IDataUnitCorpus data;
+	
+	/**
+	 * Number of the current crawl
+	 */
 	private int currentCrawl;
 	
+	/**
+	 * Constructor without parameters
+	 */
 	public CrawlerBase() {
 		this.analyzers = new ListMap<>();
 	}
@@ -82,17 +101,6 @@ public class CrawlerBase implements ICrawler {
 	public void addAnalyzer(IAnalyzer analyzer, int crawlNumber) {
 		this.analyzers.put(crawlNumber, analyzer);
 	}
-
-//	@Override
-//	public IAnalysisResult getCurrentAnalysis() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public void resetAnalysis() {
-//		// TODO Auto-generated method stub		
-//	}
 
 	@Override
 	public IDataUnitDoc generateDataUnitDocLevel(IDataUnitDoc input) {

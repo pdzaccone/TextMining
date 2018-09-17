@@ -27,17 +27,53 @@ import utils.ListMap;
 import utils.PairAnalysisResults;
 import utils.WeightedObject;
 
+/**
+ * This {@link IAnalyzer} gathers statistics about the input data and the resulting analysis 
+ * @author Pdz
+ *
+ */
 public class StatisticsGatherer implements IDocAnalyzer, ICorpusAnalyzer {
 
+	/**
+	 * "Rigid" data to gather (data types with single values)
+	 */
 	private static final List<AnalysisTypes> dataToGatherRigid = Arrays.asList(AnalysisTypes.documentID);
+	
+	/**
+	 * "Flexible" data to gather (data types with multiple values, especially where the number of values is unknown at compile-time)
+	 */
 	private static final List<AnalysisTypes> dataToGatherFlex = Arrays.asList(AnalysisTypes.language, AnalysisTypes.category);
 	
+	/**
+	 * List with additional types of "rigid" data
+	 * <p> Cannot say for sure anymore, but probably list with "rigid" data that were discovered during the statistics gathering?
+	 * I mean, that were not originally planned for. Maybe
+	 */
 	private List<AnalysisTypes> additionalRigidData;
+	
+	/**
+	 * Internal data storage
+	 */
 	private Map<String, StatisticsBlock> data;
+	
+	/**
+	 * Main list with "rigid" data types 
+	 */
 	private List<AnalysisTypes> rigidEntries;
+	
+	/**
+	 * Storage with "flexible" data
+	 */
 	private ListMap<AnalysisTypes, String> flexibleEntries;
+	
+	/**
+	 * Whether the {@link IAnalyzer} has been initialized successfully
+	 */
 	private boolean isInitialized;
 	
+	/**
+	 * Constructor without parameters
+	 */
 	public StatisticsGatherer() {
 		this.isInitialized = false;
 		this.data = new HashMap<>();
@@ -94,6 +130,12 @@ public class StatisticsGatherer implements IDocAnalyzer, ICorpusAnalyzer {
 		return new PairAnalysisResults();
 	}
 
+	/**
+	 * Checks whether the provided document has data of specified type and adds these data to the storage with "flexible" data
+	 * @param input Document to check
+	 * @param type Data type to look for
+	 * @return Resulting sorted set of weighted objects
+	 */
 	private TreeSet<WeightedObject> checkDataType(IDataUnitDoc input, AnalysisTypes type) {
 		List<IAnalysisResult> anRes = input.getAnalysisResults(type);
 		TreeSet<WeightedObject> data = new TreeSet<>();
@@ -108,7 +150,13 @@ public class StatisticsGatherer implements IDocAnalyzer, ICorpusAnalyzer {
 		return data;
 	}
 
-	public void saveToFile(String path) {
+	/**
+	 * Saves gathered statistics to the provided Excel-file
+	 * @param path Excel file to save statistics to
+	 * @return True, if data were saved successfully, otherwise false
+	 */
+	public boolean saveToFile(String path) {
+		boolean Ok = true;
 		try(FileOutputStream fileOut = new FileOutputStream(path);) {
 			Workbook workbook = new HSSFWorkbook();
 			Sheet sheet = workbook.createSheet();
@@ -150,13 +198,22 @@ public class StatisticsGatherer implements IDocAnalyzer, ICorpusAnalyzer {
 			fileOut.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			Ok = false;
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			Ok = false;
 			e.printStackTrace();
 		}
+		return Ok;
 	}
 
+	/**
+	 * Helper-method, responsible for preparing a formatting for the Excel file
+	 * @param wb Excel workbook
+	 * @param sheet Excel sheet
+	 * @return Next row to write data to
+	 */
 	private int prepareHeaders(Workbook wb, Sheet sheet) {
 		Row header1 = sheet.createRow(0);
 		Row header2 = null;

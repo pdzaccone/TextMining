@@ -25,10 +25,23 @@ import utils.ListMap;
 import utils.PairDataUnitAnalysis;
 import utils.WeightedObject;
 
+/**
+ * Base class for {@link IDataUnit} of type document
+ * @author Pdz
+ *
+ */
 public class DocumentBase implements IDataUnitDoc {
 	
+	/**
+	 * Tag to recognize this specific version of the document
+	 */
 	public static final String typeTag = "docBase";
 
+	/**
+	 * Reads document from an XML-file
+	 * @param reader Initialized XML reader, with cursor at the beginning of the document entry
+	 * @return Resulting document or null
+	 */
 	public static IReadableXML createFromXML(XMLEventReader reader) {
 		boolean Ok = true, goOn = true;
 		ListMap<AnalysisTypes, IAnalysisResult> anData = new ListMap<>();
@@ -98,45 +111,49 @@ public class DocumentBase implements IDataUnitDoc {
 		return null;
 	}
 
+	/**
+	 * Internal storage with elemental data blocks
+	 */
 	private Map<String, IDataUnitElemental> data;
+	
+	/**
+	 * Internal storage with analysis data
+	 */
 	private ListMap<AnalysisTypes, IAnalysisResult> analysis;
+	
+	/**
+	 * Document ID
+	 */
 	private int ID;
 
+	/**
+	 * Constructor without parameters
+	 */
 	public DocumentBase() {
 		data = new HashMap<String, IDataUnitElemental>();
 		analysis = new ListMap<AnalysisTypes, IAnalysisResult>();
 		this.ID = IDataUnitDoc.DEFAULT_ID;
 	}
 
+	/**
+	 * Constructor with parameters
+	 * @param id New ID
+	 */
 	public DocumentBase(int id) {
 		data = new HashMap<String, IDataUnitElemental>();
 		analysis = new ListMap<AnalysisTypes, IAnalysisResult>();
 		this.ID = id;
 	}
 
-
+	/**
+	 * Constructor with parameters 
+	 * @param src Source data - a set of elemental data blocks
+	 */
 	public DocumentBase(Map<String, IDataUnitElemental> src) {
 		Objects.requireNonNull(src);
 		data = src;
 		analysis = new ListMap<AnalysisTypes, IAnalysisResult>();
 	}
-
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (obj instanceof DocumentBase) {
-//			return this.data.equals(((DocumentBase)obj).data)
-//					&& this.ID == (((DocumentBase)obj).ID)
-//					&& this.analysis.equals(((DocumentBase)obj).analysis);
-//		}
-//		return false;
-//	}
-//	
-//	@Override
-//    public int hashCode() {
-//		return 31 + (this.analysis == null ? 0 : this.analysis.hashCode()) 
-//				+ (this.data == null ? 0 : this.data.hashCode())
-//				+ this.ID;
-//    }
 
 	@Override
 	public IDataUnitDoc applyCrawler(ICrawler crawler) {
@@ -179,7 +196,7 @@ public class DocumentBase implements IDataUnitDoc {
 			if (!this.analysis.isEmpty()) {
 				writer.writeStartElement(XMLTags.analysisData.getTagText());
 				for (AnalysisTypes type : this.analysis.keySet()) {
-					if (type.writingToXMLSupported()) {
+					if (type.canBeWrittenToXML()) {
 						writer.writeStartElement(type.getTagText());
 						for (IAnalysisResult res : this.analysis.get(type)) {
 							if (!res.writeToXML(writer)) {
@@ -199,6 +216,11 @@ public class DocumentBase implements IDataUnitDoc {
 		return Ok;
 	}
 	
+	/**
+	 * Helper method for writing internal data to the XML file
+	 * @param writer Initialized XML writer
+	 * @return True, if data were saved successfully, otherwise false
+	 */
 	private boolean writeData(IWriterXML writer) {
 		boolean Ok = true;
 		try {
@@ -247,7 +269,7 @@ public class DocumentBase implements IDataUnitDoc {
 
 	@Override
 	public void resetAnalysis(AnalysisTypes type) {
-		this.analysis.removeType(type);
+		this.analysis.removeKey(type);
 	}
 
 	@Override

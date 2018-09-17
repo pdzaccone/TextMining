@@ -4,7 +4,12 @@ import java.util.List;
 
 import utils.WeightedMap;
 
-public class IDF_LogSmooth implements FunctionIDF {
+/**
+ * Specific implementation of {@link IFunctionIDF}, calculating IDF as a smoothed logarithmical function of other terms' weights 
+ * @author Pdz
+ *
+ */
+public class IDF_LogSmooth implements IFunctionIDF {
 
 	@Override
 	public double calculate(String term, List<WeightedMap> inputCorpus) {

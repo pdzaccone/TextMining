@@ -15,24 +15,52 @@ import org.apache.commons.math3.linear.SingularValueDecomposition;
 
 import utils.Tuple;
 
+/**
+ * Apache Commons implementation of a term-document matrix
+ * @author Pdz
+ *
+ */
 public class DTMatrixApacheCommons implements IDocTermMatrix {
 
+	/**
+	 * This threshold value is used to determine whether the value can be considered 0
+	 */
 	private static final double EPSILON = 0.00001;
 	
+	/**
+	 * Map, "connecting" document indices and vector indices
+	 */
 	private Map<Integer, Integer> docIndices;
+	
+	/**
+	 * Matrix data
+	 */
 	private RealMatrix data;
 	
+	/**
+	 * Constructor without parameters
+	 */
 	public DTMatrixApacheCommons() {
 		this.docIndices = new HashMap<>();
 		this.data = null;
 	}
 	
+	/**
+	 * Constructor with parameters
+	 * @param numberTerms Total number of terms
+	 * @param numberDocs Total number of documents
+	 */
 	public DTMatrixApacheCommons(int numberTerms, int numberDocs) {
 		this.docIndices = new HashMap<>();
 		data = new Array2DRowRealMatrix(numberTerms, numberDocs);
 	}
 
-	public DTMatrixApacheCommons(RealMatrix matrix, Map<Integer, Integer> indices) {
+	/**
+	 * Private constructor with parameters
+	 * @param matrix Matrix data
+	 * @param indices Indices map
+	 */
+	private DTMatrixApacheCommons(RealMatrix matrix, Map<Integer, Integer> indices) {
 		this.data = matrix;
 		this.docIndices = indices;
 	}
@@ -63,18 +91,6 @@ public class DTMatrixApacheCommons implements IDocTermMatrix {
 			data.setColumnVector(columnNum, ((TermsVectorApacheCommons)input).getVectorData());
 			this.docIndices.put(columnNum, input.getDocID());
 		}
-	}
-
-	@Override
-	public double calcDistanceTerms(int term1, int term2) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double calcDistanceDocs(int doc1, int doc2) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override

@@ -5,6 +5,11 @@ import java.util.List;
 
 import linearAlgebra.IDocTermMatrix;
 
+/**
+ * None-filter
+ * @author Pdz
+ *
+ */
 public class MatrixFilterNone implements IMatrixFilter {
 
 	@Override

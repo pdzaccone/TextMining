@@ -25,18 +25,61 @@ import utils.PairAnalysisResults;
 import utils.WeightedMap;
 import utils.WeightedObject;
 
+/**
+ * This is the main {@link IAnalyzer} that is designed to identify categories. It can work both with and without the existing categories data
+ * @author Pdz
+ *
+ */
 public class CategoriesCalculator implements ICategorizer {
 
+	/**
+	 * Default term weight value when integrating keywords from previously "calculated" categories
+	 */
 	private static final double defaultKeywordWeight = 5;
 	
+	/**
+	 * Internal weights-to-distance converter, used for data preprocessing inside this analyzer
+	 */
 	private final IWeightsToDistancesConverter converter;
+	
+	/**
+	 * Clustering algorithm, used during the clustering stage
+	 */
 	private final IClusterer clusterer;
+	
+	/**
+	 * Whether the {@link IAnalyzer} has been initialized successfully
+	 */
 	private boolean isInitialized;
+	
+	/**
+	 * Whether this {@link IAnalyzer} should overwrite already existing results from previous analysis if they exist
+	 */
 	private final boolean shouldOverwrite;
+	
+	/**
+	 * This value is used during the generation of categories to decide the number of keywords to be kept and saved
+	 */
 	private int numberOfImportantKeywords;
+	
+	/**
+	 * Internal categories data
+	 */
 	private Map<String, Map<Languages, WeightedMap>> categoriesData;
+	
+	/**
+	 * Original (previously calculated or user-provided) categories
+	 */
 	private Map<String, ICategory> categoriesOriginal;
 	
+	/**
+	 * Constructor with parameters
+	 * @param categories Original categories
+	 * @param overwrite Whether to overwrite old categories data
+	 * @param inConverter Weights-to-distance converter to use
+	 * @param inClusterer Clustering algorithm to use
+	 * @param keywordsNum Number of keywords to keep when generating a new category
+	 */
 	public CategoriesCalculator(Map<String, ICategory> categories, boolean overwrite, IWeightsToDistancesConverter inConverter, 
 			IClusterer inClusterer, int keywordsNum) {
 		this.shouldOverwrite = overwrite;
@@ -100,6 +143,12 @@ public class CategoriesCalculator implements ICategorizer {
 		return results;
 	}
 
+	/**
+	 * Processes gathered categories data in order to prepare a list of most important keywords for a given document (for a specific language) 
+	 * @param weights Weighted terms of a document
+	 * @param categories Categories of a document
+	 * @param language Language
+	 */
 	private void processCategoriesData (Map<String, ? extends Number> weights, MetadataModification categories, Languages language) {
 		Comparator<Pair<String, Double>> comparator = (Pair<String, Double> p1, Pair<String, Double> p2) -> (Double.compare(p2.getSecond(), p1.getSecond()));
 		TreeSet<Pair<String, Double>> keywords = new TreeSet<>(comparator);
